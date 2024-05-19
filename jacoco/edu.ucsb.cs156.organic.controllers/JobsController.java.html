@@ -63,19 +63,20 @@ import edu.ucsb.cs156.organic.services.jobs.JobService;
     @PostMapping(&quot;/launch/testjob&quot;)
     public Job launchTestJob(
         @Parameter(name=&quot;fail&quot;) @RequestParam Boolean fail, 
-        @Parameter(name=&quot;sleepMs&quot;) @RequestParam Integer sleepMs
+        @Parameter(name=&quot;sleepMs&quot;) @RequestParam Integer sleepMs,
+        @Parameter(name=&quot;id&quot;) @RequestParam Integer id
     ) {
-<span class="fc" id="L68">        TestJob testJob = TestJob.builder()</span>
-<span class="fc" id="L69">        .fail(fail)</span>
-<span class="fc" id="L70">        .sleepMs(sleepMs)</span>
-<span class="fc" id="L71">        .build();</span>
+<span class="fc" id="L69">        TestJob testJob = TestJob.builder()</span>
+<span class="fc" id="L70">        .fail(fail)</span>
+<span class="fc" id="L71">        .sleepMs(sleepMs)</span>
+<span class="fc" id="L72">        .build();</span>
 
         // Reference: frontend/src/components/Jobs/TestJobForm.js
-<span class="fc bfc" id="L74" title="All 4 branches covered.">        if (sleepMs &lt; 0 || sleepMs &gt; 60000) {</span>
-<span class="fc" id="L75">            throw new IllegalArgumentException(&quot;sleepMs must be between 0 and 60000&quot;);</span>
+<span class="fc bfc" id="L75" title="All 4 branches covered.">        if (sleepMs &lt; 0 || sleepMs &gt; 60000) {</span>
+<span class="fc" id="L76">            throw new IllegalArgumentException(&quot;sleepMs must be between 0 and 60000&quot;);</span>
         }
 
-<span class="fc" id="L78">        return jobService.runAsJob(testJob);</span>
+<span class="fc" id="L79">        return jobService.runAsJob(testJob, id);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
