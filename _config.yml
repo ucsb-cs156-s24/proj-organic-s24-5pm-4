@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s24/proj-organic-s24-5pm-4
 owner: ucsb-cs156-s24
 repo_name: proj-organic-s24-5pm-4
-pull_requests: [{"author":{"id":"U_kgDOBX3Lkw","is_bot":false,"login":"ElijahCanderson","name":""},"headRefName":"Eli-ExposeCommit","number":8,"title":"DO NOT PULL","url":"https://github.com/ucsb-cs156-s24/proj-organic-s24-5pm-4/pull/8"},{"author":{"id":"U_kgDOBdC-lQ","is_bot":false,"login":"Simonmann17","name":""},"headRefName":"Simon-Swagger","number":7,"title":"Added Option to Enable/Disable Swagger on Navbar","url":"https://github.com/ucsb-cs156-s24/proj-organic-s24-5pm-4/pull/7"}]
+pull_requests: [{"author":{"id":"U_kgDOBX3Lkw","is_bot":false,"login":"ElijahCanderson","name":""},"headRefName":"Eli-ExposeCommit","number":10,"title":"File changes - Unable to fix  commitID and Message ","url":"https://github.com/ucsb-cs156-s24/proj-organic-s24-5pm-4/pull/10"},{"author":{"id":"U_kgDOBdC-lQ","is_bot":false,"login":"Simonmann17","name":""},"headRefName":"Simon-Swagger","number":7,"title":"Added Option to Enable/Disable Swagger on Navbar","url":"https://github.com/ucsb-cs156-s24/proj-organic-s24-5pm-4/pull/7"}]
