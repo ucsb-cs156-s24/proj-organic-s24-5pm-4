@@ -4,6 +4,8 @@
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.stereotype.Service;
 
 import edu.ucsb.cs156.organic.models.SystemInfo;
@@ -11,10 +13,13 @@ import edu.ucsb.cs156.organic.models.SystemInfo;
 // This class relies on property values
 // For hints on testing, see: https://www.baeldung.com/spring-boot-testing-configurationproperties
 
-<span class="fc" id="L14">@Slf4j</span>
+<span class="fc" id="L16">@Slf4j</span>
 @Service(&quot;systemInfo&quot;)
 @ConfigurationProperties
-<span class="fc" id="L17">public class SystemInfoServiceImpl extends SystemInfoService {</span>
+@PropertySources(
+        @PropertySource(&quot;classpath:git.properties&quot;)
+)
+<span class="fc" id="L22">public class SystemInfoServiceImpl extends SystemInfoService {</span>
   
   @Value(&quot;${spring.h2.console.enabled:false}&quot;)
   private boolean springH2ConsoleEnabled;
@@ -22,7 +27,7 @@ import edu.ucsb.cs156.organic.models.SystemInfo;
   @Value(&quot;${app.showSwaggerUILink:false}&quot;)
   private boolean showSwaggerUILink;
 
-<span class="fc" id="L25">  @Value(&quot;${app.sourceRepo}&quot;)</span>
+<span class="fc" id="L30">  @Value(&quot;${app.sourceRepo}&quot;)</span>
   private String sourceRepo = &quot;https://github.com/ucsb-cs156-s24/proj-organic-s24-5pm-4&quot;;
 
   @Value(&quot;${git.commit.message.short:unknown}&quot;)
@@ -32,20 +37,21 @@ import edu.ucsb.cs156.organic.models.SystemInfo;
   private String commitId;
 
   public static String githubUrl(String repo, String commit) {
-<span class="fc bfc" id="L35" title="All 4 branches covered.">    return commit != null &amp;&amp; repo != null ? repo + &quot;/commit/&quot; + commit : null;</span>
+<span class="fc bfc" id="L40" title="All 4 branches covered.">    return commit != null &amp;&amp; repo != null ? repo + &quot;/commit/&quot; + commit : null;</span>
   }
 
   public SystemInfo getSystemInfo() {
-<span class="fc" id="L39">    SystemInfo si = SystemInfo.builder()</span>
-<span class="fc" id="L40">    .springH2ConsoleEnabled(this.springH2ConsoleEnabled)</span>
-<span class="fc" id="L41">    .showSwaggerUILink(this.showSwaggerUILink)</span>
-<span class="fc" id="L42">    .sourceRepo(&quot;https://github.com/ucsb-cs156-s24/proj-organic-s24-5pm-4&quot;)</span>
-<span class="fc" id="L43">    .commitMessage(this.commitMessage)</span>
-<span class="fc" id="L44">    .commitId(this.commitId)</span>
-<span class="fc" id="L45">    .githubUrl(githubUrl(&quot;https://github.com/ucsb-cs156-s24/proj-organic-s24-5pm-4&quot;, this.commitId))</span>
-<span class="fc" id="L46">    .build();</span>
-<span class="fc" id="L47">  log.info(&quot;getSystemInfo returns {}&quot;,si);</span>
-<span class="fc" id="L48">  return si;</span>
+<span class="fc" id="L44">    SystemInfo si = SystemInfo.builder()</span>
+<span class="fc" id="L45">    .springH2ConsoleEnabled(this.springH2ConsoleEnabled)</span>
+<span class="fc" id="L46">    .showSwaggerUILink(this.showSwaggerUILink)</span>
+<span class="fc" id="L47">    .sourceRepo(this.sourceRepo)</span>
+<span class="fc" id="L48">    .commitMessage(this.commitMessage)</span>
+<span class="fc" id="L49">    .commitId(this.commitId)</span>
+<span class="fc" id="L50">    .githubUrl(githubUrl(this.sourceRepo, this.commitId))</span>
+
+<span class="fc" id="L52">    .build();</span>
+<span class="fc" id="L53">  log.info(&quot;getSystemInfo returns {}&quot;,si);</span>
+<span class="fc" id="L54">  return si;</span>
   }
 
 }
