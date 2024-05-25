@@ -17,6 +17,7 @@
     <description>A tool for managing github organizations for courses</description>
     <properties>
         <java.version>17</java.version>
+        <targetClasses>${targetClasses:edu.ucsb.cs156.*}</targetClasses>
     </properties>
     <dependencies>
         <dependency>
@@ -247,6 +248,9 @@
                     <targetTests>
                         <param>edu.ucsb.cs156.*</param>
                     </targetTests>
+                    <targetClasses>
+                        <param>${targetClasses}</param>
+                    </targetClasses>
                     <excludedClasses>
                         <param>edu.ucsb.cs156.organic.aop.LoggingAspect</param>
                         <param>edu.ucsb.cs156.organic.controllers.FrontendController</param>
