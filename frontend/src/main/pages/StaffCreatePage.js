@@ -10,8 +10,8 @@ export default function StaffCreatePage({storybook=false}) {
         url: "/api/courses/addStaff",
         method: "POST",
         params: {
-        courseId: staff.courseId,
-        githubLogin: staff.githubId
+        courseId: staff.courses,
+        githubLogin: staff.users
         }
     });
 
@@ -33,7 +33,7 @@ export default function StaffCreatePage({storybook=false}) {
     }
     
     if (isSuccess && !storybook) {
-        return <Navigate to="/courses/:id/staff" />
+        return <Navigate to="/courses" />
     }
 
     return (
