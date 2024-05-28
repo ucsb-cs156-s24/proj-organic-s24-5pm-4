@@ -1,7 +1,7 @@
 import React from 'react';
 import UserDropdown from "../../../main/components/Users/UserDropdown";
-import {schoolsFixtures} from "../../../fixtures/schoolsFixtures";
-// import {usersFixtures} from "../../../fixtures/usersFixtures";
+// import {schoolsFixtures} from "../../../fixtures/schoolsFixtures";
+import {usersFixtures} from "../../../fixtures/usersFixtures";
 import {Button, Form} from "react-bootstrap";
 import {FormProvider, useForm} from "react-hook-form";
 
@@ -19,7 +19,7 @@ const Template = (args) => {
 export const Filled = Template.bind({});
 
 Filled.args={
-    users: schoolsFixtures.threeSchools,
+    users: usersFixtures.threeUsers,
     submitAction: (data) => {
         console.log("Submit was clicked with data: ", data);
         window.alert("Submit was clicked with data: " + JSON.stringify(data));
@@ -29,7 +29,7 @@ Filled.args={
 export const Preselected = Template.bind({});
 
 Preselected.args={
-    users: schoolsFixtures.threeSchools,
+    users: usersFixtures.threeUsers,
     initialContents: {"user":11111 },
     submitAction: (data) => {
         console.log("Submit was clicked with data: ", data);
