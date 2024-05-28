@@ -84,9 +84,9 @@ describe("Tests as a standalone user dropdown", () =>{
 
         expect(screen.getByTestId("UserDropdownExample-users")).toBeInTheDocument();
 
-        expect(user1).toHaveTextContent("Phill Conrad");
-        expect(user2).toHaveTextContent("Chris Gaucho");
-        expect(user3).toHaveTextContent("Lauren del Playa");
+        expect(user1).toHaveTextContent("pconrad");
+        expect(user2).toHaveTextContent("cgaucho");
+        expect(user3).toHaveTextContent("ldelplaya");
     })
 
     test("Validation work correctly", async () => {

@@ -84,9 +84,9 @@ describe("Tests as a standalone course dropdown", () =>{
 
         expect(screen.getByTestId("CourseDropdownExample-courses")).toBeInTheDocument();
 
-        expect(course1).toHaveTextContent("CS156");
-        expect(course2).toHaveTextContent("CS185");
-        expect(course3).toHaveTextContent("CS170");
+        expect(course1).toHaveTextContent("1");
+        expect(course2).toHaveTextContent("2");
+        expect(course3).toHaveTextContent("3");
     })
 
     test("Validation work correctly", async () => {

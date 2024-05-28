@@ -18,8 +18,8 @@ const UserDropdown = ({users = [], testId}) => {
             {users.map(function (object, i) {
                 const key = `${testId}-option-${i}`
                 return(
-                    <option key={key} data-testid={key} value={object.fullName}>
-                        {object.fullName}
+                    <option key={key} data-testid={key} value={object.githubLogin}>
+                        {object.githubLogin}
                     </option>
                 );
             })}
