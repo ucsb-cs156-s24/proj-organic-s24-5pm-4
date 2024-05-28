@@ -1,12 +1,12 @@
 import React from 'react';
-import UserDropdown from "../../../main/components/Users/UserDropdown";
-import usersFixtures from "../../../fixtures/usersFixtures";
+import CourseDropdown from "../../../main/components/Courses/CourseDropdown";
+import {coursesFixtures} from "../../../fixtures/coursesFixtures";
 import {Button, Form} from "react-bootstrap";
 import {FormProvider, useForm} from "react-hook-form";
 
 export default {
-    title: "components/Users/UserDropdown",
-    component: UserDropdown
+    title: "components/Courses/CourseDropdown",
+    component: CourseDropdown
 }
 
 const Template = (args) => {
@@ -18,7 +18,7 @@ const Template = (args) => {
 export const Filled = Template.bind({});
 
 Filled.args={
-    users: usersFixtures.threeUsers,
+    courses: coursesFixtures.threeCourses,
     submitAction: (data) => {
         console.log("Submit was clicked with data: ", data);
         window.alert("Submit was clicked with data: " + JSON.stringify(data));
@@ -28,8 +28,8 @@ Filled.args={
 export const Preselected = Template.bind({});
 
 Preselected.args={
-    users: usersFixtures.threeUsers,
-    initialContents: {"user":11111 },
+    courses: coursesFixtures.threeCourses,
+    initialContents: {"course":1 },
     submitAction: (data) => {
         console.log("Submit was clicked with data: ", data);
         window.alert("Submit was clicked with data: " + JSON.stringify(data));
@@ -37,7 +37,7 @@ Preselected.args={
 }
 
 
-const ModelForm = ({initialContents, submitAction, users}) =>{
+const ModelForm = ({initialContents, submitAction, courses}) =>{
     const formState = useForm({defaultValues: initialContents || {},});
     const {
         handleSubmit
@@ -45,10 +45,10 @@ const ModelForm = ({initialContents, submitAction, users}) =>{
     return(
         <FormProvider {...formState}>
             <Form onSubmit={handleSubmit(submitAction)}>
-                <UserDropdown users={users} testId="UserDropdownExample" />
+                <CourseDropdown courses={courses} testId="CourseDropdownExample" />
                 <Button
                     type="submit"
-                    data-testid="UserDropdownExample-submit"
+                    data-testid="CourseDropdownExample-submit"
                 >
                     Submit
                 </Button>
