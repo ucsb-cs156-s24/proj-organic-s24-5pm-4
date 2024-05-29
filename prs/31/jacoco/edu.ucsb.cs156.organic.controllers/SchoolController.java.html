@@ -72,7 +72,7 @@ import edu.ucsb.cs156.organic.repositories.UserRepository;
 
 <span class="fc" id="L73">        return school;</span>
     }
-
+ 
     @Operation(summary= &quot;List all schools&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
     @GetMapping(&quot;/all&quot;)
