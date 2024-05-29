@@ -84,7 +84,7 @@ describe("CoursesStaffPage tests", () => {
             expect(screen.getByText(/Add Staff Member/)).toBeInTheDocument();
         });
         const button = screen.getByText(/Add Staff Member/);
-        expect(button).toHaveAttribute("href", "/courses/addStaff");
+        expect(button).toHaveAttribute("href", "/courses/17/addStaff");
         expect(button).toHaveAttribute("style", "float: right;");
     });
 
@@ -108,7 +108,7 @@ describe("CoursesStaffPage tests", () => {
             expect(screen.getByText(/Add Staff Member/)).toBeInTheDocument();
         });
         const button = screen.getByText(/Add Staff Member/);
-        expect(button).toHaveAttribute("href", "/courses/addStaff");
+        expect(button).toHaveAttribute("href", "/courses/17/addStaff");
         expect(button).toHaveAttribute("style", "float: right;");
     });
     
