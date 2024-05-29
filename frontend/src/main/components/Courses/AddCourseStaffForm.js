@@ -55,7 +55,7 @@ function AddCourseStaffForm({ initialContents, submitAction, buttonLabel = "Crea
                 <Row>
                     <Col>
                         <Form.Group className="mb-3" >
-                            <UserDropdown testId="AddCourseStaffForm" users={users}/>
+                            <UserDropdown testId="AddCourseStaffForm-user" users={users}/>
                         </Form.Group>
                     </Col>
                     

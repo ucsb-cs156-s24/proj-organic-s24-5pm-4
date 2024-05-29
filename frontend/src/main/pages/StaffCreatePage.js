@@ -1,20 +1,16 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import AddCourseStaffForm from "main/components/Courses/AddCourseStaffForm";
-import { Navigate } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
 export default function StaffCreatePage({storybook=false}) {
-    // Hack-y way of getting the course id
-    // Gets the current URL, extracts the course id from it
-    const currentUrl = window.location.href;
-    var field = currentUrl.split('courses')[1];
-    let matches = field[1].match(/(\d+)/);
+    let { id } = useParams();
     const objectToAxiosParams = (staff) => ({
         url: "/api/courses/addStaff",
         method: "POST",
         params: {
-        courseId: parseInt(matches[0]),
+        courseId: id,
         githubLogin: staff.users
         }
     });

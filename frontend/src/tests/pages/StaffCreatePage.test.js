@@ -72,12 +72,12 @@ describe("StaffCreatePage tests", () => {
         );
 
         await waitFor(() => {
-            expect(screen.getByTestId("StaffForm-name")).toBeInTheDocument();
+            expect(screen.getByTestId("AddCourseStaffForm-user")).toBeInTheDocument();
         });
 
-        const courseIdField = screen.getByTestId("StaffForm-courseId");
-        const githubIdField = screen.getByTestId("StaffForm-githubId");
-        const submitButton = screen.getByTestId("StaffForm-submit");
+        const courseIdField = screen.getByTestId("AddCourseStaffForm-courseId");
+        const githubIdField = screen.getByTestId("AddCourseStaffForm-githubId");
+        const submitButton = screen.getByTestId("AddCourseStaffForm-submit");
 
         fireEvent.change(courseIdField, { target: { value: 1 } });
         fireEvent.change(githubIdField, { target: { value: 'scottpchow23' } });
