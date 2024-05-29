@@ -4,7 +4,7 @@ import { addCourseStaffFixtures } from "fixtures/addCourseStaffFixtures";
 import { BrowserRouter as Router } from "react-router-dom";
 import AxiosMockAdapter from "axios-mock-adapter";
 import axios from "axios";
-import {usersFixtures} from "../../../fixtures/usersFixtures";
+import usersFixtures from "../../../fixtures/usersFixtures";
 import {QueryClient, QueryClientProvider} from "react-query"; // Import the function to test
 
 const mockedNavigate = jest.fn();
