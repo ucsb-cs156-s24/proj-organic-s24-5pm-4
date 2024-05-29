@@ -3,7 +3,6 @@ import {FormProvider, useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import React from 'react';
 import {useBackend} from "../../utils/useBackend";
-import CourseDropdown from "./CourseDropdown";
 import UserDropdown from '../Users/UserDropdown';
 
 function AddCourseStaffForm({ initialContents, submitAction, buttonLabel = "Create" }) {
@@ -14,15 +13,6 @@ function AddCourseStaffForm({ initialContents, submitAction, buttonLabel = "Crea
         register,
         handleSubmit,
     } = formState;
-
-    const { data: courses, error: _error, status: _status } =
-        useBackend(
-            // Stryker disable next-line all : don't test internal caching of React Query
-            ["/api/courses/all"],
-            // Stryker disable next-line all : GET is the default
-            { method: "GET", url: "/api/courses/all" },
-            []
-        );
 
     const { data: users, error: __error, status: __status } =
         useBackend(
@@ -63,11 +53,6 @@ function AddCourseStaffForm({ initialContents, submitAction, buttonLabel = "Crea
                 </Row>
 
                 <Row>
-                    <Col>
-                        <Form.Group className="mb-3" >
-                            <CourseDropdown testId="AddCourseStaffForm" courses={courses}/>
-                        </Form.Group>
-                    </Col>
                     <Col>
                         <Form.Group className="mb-3" >
                             <UserDropdown testId="AddCourseStaffForm" users={users}/>

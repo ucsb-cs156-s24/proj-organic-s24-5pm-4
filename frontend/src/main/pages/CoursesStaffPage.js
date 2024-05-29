@@ -15,7 +15,7 @@ export default function CourseIndexPage() {
       return (
           <Button
               variant="primary"
-              href="/courses/addStaff"
+              href={"/courses/" + id + "/addStaff"}
               style={{ float: "right" }}
           >
               Add Staff Member

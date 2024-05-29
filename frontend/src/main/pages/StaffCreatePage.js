@@ -5,12 +5,16 @@ import { useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
 export default function StaffCreatePage({storybook=false}) {
-
+    // Hack-y way of getting the course id
+    // Gets the current URL, extracts the course id from it
+    const currentUrl = window.location.href;
+    var field = currentUrl.split('courses')[1];
+    let matches = field[1].match(/(\d+)/);
     const objectToAxiosParams = (staff) => ({
         url: "/api/courses/addStaff",
         method: "POST",
         params: {
-        courseId: staff.courses,
+        courseId: parseInt(matches[0]),
         githubLogin: staff.users
         }
     });
