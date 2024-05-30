@@ -18,7 +18,7 @@ import React from "react";
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
-        ["/courses/${cell.row.values.id}/staff"]
+        ["/courses/:id/staff"]
     );
     // Stryker restore all 
 
