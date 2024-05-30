@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -235,33 +235,9 @@
 <a name='L170'></a><a href='#L170'>170</a>
 <a name='L171'></a><a href='#L171'>171</a>
 <a name='L172'></a><a href='#L172'>172</a>
-<a name='L173'></a><a href='#L173'>173</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">23x</span>
-<span class="cline-any cline-yes">23x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">23x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">23x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">23x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">23x</span>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -270,8 +246,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33x</span>
+<span class="cline-any cline-yes">33x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -408,23 +412,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Button, Form, Row, Col } from 'react-bootstrap';
-import { useForm } from 'react-hook-form'
+import {FormProvider, useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { enableEndDateValidation } from './dateValidation'; // Import the JavaScript file
 import React, { useEffect } from 'react';
+import {useBackend} from "../../utils/useBackend";
+import SchoolDropdown from "./SchoolDropdown";
 &nbsp;
 function CoursesForm({ initialContents, submitAction, buttonLabel = "Create" }) {
     useEffect(() =&gt; {
         enableEndDateValidation(); // Call the function to enable end date validation
     },); // Run only once after component mounts
     // Stryker disable all
+    const formState = useForm({defaultValues:initialContents || {},})
+&nbsp;
     const {
         register,
         formState: { errors },
         handleSubmit,
-    } = useForm(
-        { defaultValues: initialContents || {}, }
-    );
+    } = formState;
+&nbsp;
+    const { data: schools, error: _error, status: _status } =
+        useBackend(
+            // Stryker disable next-line all : don't test internal caching of React Query
+            ["/api/schools/all"],
+            // Stryker disable next-line all : GET is the default
+            { method: "GET", url: "/api/schools/all" },
+            []
+        );
+&nbsp;
 &nbsp;
     const navigate = useNavigate();
     
@@ -434,148 +450,138 @@ function CoursesForm({ initialContents, submitAction, buttonLabel = "Create" }) 
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
     
     return (
+        &lt;FormProvider {...formState}&gt;
+            &lt;Form onSubmit={handleSubmit(submitAction)}&gt;
 &nbsp;
-        &lt;Form onSubmit={handleSubmit(submitAction)}&gt;
 &nbsp;
+                &lt;Row&gt;
 &nbsp;
-            &lt;Row&gt;
+                    {initialContents &amp;&amp; (
+                        &lt;Col&gt;
+                            &lt;Form.Group className="mb-3" &gt;
+                                &lt;Form.Label htmlFor="id"&gt;Id&lt;/Form.Label&gt;
+                                &lt;Form.Control
+                                    data-testid="CoursesForm-id"
+                                    id="id"
+                                    type="text"
+                                    {...register("id")}
+                                    value={initialContents.id}
+                                    disabled
+                                /&gt;
+                            &lt;/Form.Group&gt;
+                        &lt;/Col&gt;
+                    )}
 &nbsp;
-                {initialContents &amp;&amp; (
                     &lt;Col&gt;
                         &lt;Form.Group className="mb-3" &gt;
-                            &lt;Form.Label htmlFor="id"&gt;Id&lt;/Form.Label&gt;
+                            &lt;Form.Label htmlFor="name"&gt;Name&lt;/Form.Label&gt;
                             &lt;Form.Control
-                                data-testid="CoursesForm-id"
-                                id="id"
+                                data-testid="CoursesForm-name"
+                                id="name"
                                 type="text"
-                                {...register("id")}
-                                value={initialContents.id}
-                                disabled
+                                isInvalid={Boolean(errors.name)}
+                                {...register("name", { required: true })}
                             /&gt;
+                            &lt;Form.Control.Feedback type="invalid"&gt;
+                                {errors.name &amp;&amp; 'Name is required. '}
+                            &lt;/Form.Control.Feedback&gt;
                         &lt;/Form.Group&gt;
                     &lt;/Col&gt;
-                )}
+                &lt;/Row&gt;
 &nbsp;
-                &lt;Col&gt;
-                    &lt;Form.Group className="mb-3" &gt;
-                        &lt;Form.Label htmlFor="name"&gt;Name&lt;/Form.Label&gt;
-                        &lt;Form.Control
-                            data-testid="CoursesForm-name"
-                            id="name"
-                            type="text"
-                            isInvalid={Boolean(errors.name)}
-                            {...register("name", { required: true })}
-                        /&gt;
-                        &lt;Form.Control.Feedback type="invalid"&gt;
-                            {errors.name &amp;&amp; 'Name is required. '}
-                        &lt;/Form.Control.Feedback&gt;
-                    &lt;/Form.Group&gt;
-                &lt;/Col&gt;
-            &lt;/Row&gt;
+                &lt;Row&gt;
+                    &lt;Col&gt;
+                        &lt;Form.Group className="mb-3" &gt;
+                            &lt;SchoolDropdown testId="CoursesForm" schools={schools}/&gt;
+                        &lt;/Form.Group&gt;
+                    &lt;/Col&gt;
+                    &lt;Col&gt;
+                        &lt;Form.Group className="mb-3" &gt;
+                            &lt;Form.Label htmlFor="term"&gt;Term&lt;/Form.Label&gt;
+                            &lt;Form.Control
+                                data-testid="CoursesForm-term"
+                                id="term"
+                                type="text"
+                                isInvalid={Boolean(errors.term)}
+                                {...register("term", { required: true })}
+                            /&gt;
+                            &lt;Form.Control.Feedback type="invalid"&gt;
+                                {errors.term &amp;&amp; 'Term is required. '}
+                            &lt;/Form.Control.Feedback&gt;
+                        &lt;/Form.Group&gt;
+                    &lt;/Col&gt;
+                &lt;/Row&gt;
 &nbsp;
-            &lt;Row&gt;
-                &lt;Col&gt;
-                    &lt;Form.Group className="mb-3" &gt;
-                        &lt;Form.Label htmlFor="school"&gt;School&lt;/Form.Label&gt;
-                        &lt;Form.Control
-                            data-testid="CoursesForm-school"
-                            id="school"
-                            type="text"
-                            isInvalid={Boolean(errors.school)}
-                            {...register("school", { required: true })}
-                        /&gt;
-                        &lt;Form.Control.Feedback type="invalid"&gt;
-                            {errors.school &amp;&amp; 'School is required. '}
-                        &lt;/Form.Control.Feedback&gt;
-                    &lt;/Form.Group&gt;
-                &lt;/Col&gt;
-                &lt;Col&gt;
-                    &lt;Form.Group className="mb-3" &gt;
-                        &lt;Form.Label htmlFor="term"&gt;Term&lt;/Form.Label&gt;
-                        &lt;Form.Control
-                            data-testid="CoursesForm-term"
-                            id="term"
-                            type="text"
-                            isInvalid={Boolean(errors.term)}
-                            {...register("term", { required: true })}
-                        /&gt;
-                        &lt;Form.Control.Feedback type="invalid"&gt;
-                            {errors.term &amp;&amp; 'Term is required. '}
-                        &lt;/Form.Control.Feedback&gt;
-                    &lt;/Form.Group&gt;
-                &lt;/Col&gt;
-            &lt;/Row&gt;
+                &lt;Row&gt;
+                    &lt;Col&gt;
+                        &lt;Form.Group className="mb-3" &gt;
+                            &lt;Form.Label htmlFor="startDate"&gt;StartDate(iso format)&lt;/Form.Label&gt;
+                            &lt;Form.Control
+                                data-testid="CoursesForm-startDate"
+                                id="startDate"
+                                type="datetime-local"
+                                isInvalid={Boolean(errors.startDate)}
+                                {...register("startDate", { required: true, pattern: isodate_regex })}
+                            /&gt;
+                            &lt;Form.Control.Feedback type="invalid"&gt;
+                                {errors.startDate &amp;&amp; 'StartDate date is required. '}
+                            &lt;/Form.Control.Feedback&gt;
+                        &lt;/Form.Group&gt;
+                    &lt;/Col&gt;
+                    &lt;Col&gt;
+                        &lt;Form.Group className="mb-3" &gt;
+                            &lt;Form.Label htmlFor=""&gt;EndDate(iso format)&lt;/Form.Label&gt;
+                            &lt;Form.Control
+                                data-testid="CoursesForm-endDate"
+                                id="endDate"
+                                type="datetime-local"
+                                isInvalid={Boolean(errors.endDate)}
+                                {...register("endDate", {required: true, pattern: isodate_regex })}
+                            /&gt;
+                            &lt;Form.Control.Feedback type="invalid"&gt;
+                                {errors.endDate &amp;&amp; 'EndDate date is required. '}
+                            &lt;/Form.Control.Feedback&gt;
+                        &lt;/Form.Group&gt;
+                    &lt;/Col&gt;
+                &lt;/Row&gt;
 &nbsp;
-            &lt;Row&gt;
-                &lt;Col&gt;
-                    &lt;Form.Group className="mb-3" &gt;
-                        &lt;Form.Label htmlFor="startDate"&gt;StartDate(iso format)&lt;/Form.Label&gt;
-                        &lt;Form.Control
-                            data-testid="CoursesForm-startDate"
-                            id="startDate"
-                            type="datetime-local"
-                            isInvalid={Boolean(errors.startDate)}
-                            {...register("startDate", { required: true, pattern: isodate_regex })}
-                        /&gt;
-                        &lt;Form.Control.Feedback type="invalid"&gt;
-                            {errors.startDate &amp;&amp; 'StartDate date is required. '}
-                        &lt;/Form.Control.Feedback&gt;
-                    &lt;/Form.Group&gt;
-                &lt;/Col&gt;
-                &lt;Col&gt;
-                    &lt;Form.Group className="mb-3" &gt;
-                        &lt;Form.Label htmlFor=""&gt;EndDate(iso format)&lt;/Form.Label&gt;
-                        &lt;Form.Control
-                            data-testid="CoursesForm-endDate"
-                            id="endDate"
-                            type="datetime-local"
-                            isInvalid={Boolean(errors.endDate)}
-                            {...register("endDate", {required: true, pattern: isodate_regex })}
-                        /&gt;
-                        &lt;Form.Control.Feedback type="invalid"&gt;
-                            {errors.endDate &amp;&amp; 'EndDate date is required. '}
-                        &lt;/Form.Control.Feedback&gt;
-                    &lt;/Form.Group&gt;
-                &lt;/Col&gt;
-            &lt;/Row&gt;
+                &lt;Row&gt;
+                    &lt;Col&gt;
+                        &lt;Form.Group className="mb-3" &gt;
+                            &lt;Form.Label htmlFor="githubOrg"&gt;GithubOrg&lt;/Form.Label&gt;
+                            &lt;Form.Control
+                                data-testid="CoursesForm-githubOrg"
+                                id="githubOrg"
+                                type="text"
+                                isInvalid={Boolean(errors.githubOrg)}
+                                {...register("githubOrg", { required: true })}
+                            /&gt;
+                            &lt;Form.Control.Feedback type="invalid"&gt;
+                                {errors.githubOrg &amp;&amp; 'GithubOrg is required. '}
+                            &lt;/Form.Control.Feedback&gt;
+                        &lt;/Form.Group&gt;
+                    &lt;/Col&gt;
+                &lt;/Row&gt;
 &nbsp;
-            &lt;Row&gt;
-                &lt;Col&gt;
-                    &lt;Form.Group className="mb-3" &gt;
-                        &lt;Form.Label htmlFor="githubOrg"&gt;GithubOrg&lt;/Form.Label&gt;
-                        &lt;Form.Control
-                            data-testid="CoursesForm-githubOrg"
-                            id="githubOrg"
-                            type="text"
-                            isInvalid={Boolean(errors.githubOrg)}
-                            {...register("githubOrg", { required: true })}
-                        /&gt;
-                        &lt;Form.Control.Feedback type="invalid"&gt;
-                            {errors.githubOrg &amp;&amp; 'GithubOrg is required. '}
-                        &lt;/Form.Control.Feedback&gt;
-                    &lt;/Form.Group&gt;
-                &lt;/Col&gt;
-            &lt;/Row&gt;
-&nbsp;
-            &lt;Row&gt;
-                &lt;Col&gt;
-                    &lt;Button
-                        type="submit"
-                        data-testid="CoursesForm-submit"
-                    &gt;
-                        {buttonLabel}
-                    &lt;/Button&gt;
-                    &lt;Button
-                        variant="Secondary"
-                        onClick={() =&gt; navigate(-1)}
-                        data-testid="CoursesForm-cancel"
-                    &gt;
-                        Cancel
-                    &lt;/Button&gt;
-                &lt;/Col&gt;
-            &lt;/Row&gt;
-        &lt;/Form&gt;
-&nbsp;
+                &lt;Row&gt;
+                    &lt;Col&gt;
+                        &lt;Button
+                            type="submit"
+                            data-testid="CoursesForm-submit"
+                        &gt;
+                            {buttonLabel}
+                        &lt;/Button&gt;
+                        &lt;Button
+                            variant="Secondary"
+                            onClick={() =&gt; navigate(-1)}
+                            data-testid="CoursesForm-cancel"
+                        &gt;
+                            Cancel
+                        &lt;/Button&gt;
+                    &lt;/Col&gt;
+                &lt;/Row&gt;
+            &lt;/Form&gt;
+        &lt;/FormProvider&gt;
     )
 }
 &nbsp;
@@ -586,7 +592,7 @@ export default CoursesForm</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed May 29 2024 16:34:11 GMT-0700 (Pacific Daylight Time)
+                at Thu May 30 2024 14:34:31 GMT-0700 (Pacific Daylight Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

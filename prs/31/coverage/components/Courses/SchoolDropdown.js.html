@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for pages/HomePage.js</title>
+    <title>Code coverage report for components/Courses/SchoolDropdown.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">pages</a> HomePage.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/Courses</a> SchoolDropdown.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -95,28 +95,26 @@
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">39x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">96x</span>
+<span class="cline-any cline-yes">96x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -130,39 +128,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
-import { useCurrentUser } from "main/utils/currentUser";
-import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
+import { Form } from "react-bootstrap";
+import {useFormContext} from "react-hook-form";
 &nbsp;
-export default function HomePage() {
-    const { data: currentUser } = useCurrentUser();
+const SchoolDropdown = ({schools = [], testId}) =&gt; {
+    const {
+        register,
+        formState: {errors}
+    } = useFormContext();
 &nbsp;
-    const getPartOfDayGreeting = () =&gt; {
-        const hour = new Date().getHours();
-        if (hour &lt; 12) return "Good morning";
-        if (hour &lt; 18) return "Good afternoon";
-        return "Good evening";
-    };
-&nbsp;
-    const greeting = getPartOfDayGreeting();
-&nbsp;
-&nbsp;
-    // Determine the username to display based on currentUser status
-    const username = currentUser &amp;&amp; currentUser.loggedIn ? currentUser.root.user.githubLogin: "Please Sign in to Proceed";
-&nbsp;
-    return (
-        &lt;div data-testid={"HomePage-main-div"}&gt;
-            &lt;BasicLayout&gt;
-                &lt;h1 data-testid="homePage-title" style={{ fontSize: "75px", borderRadius: "7px", backgroundColor: "white", opacity: ".9" }} className="text-center border-0 my-3"&gt;
-                    {greeting}, {username}
-                &lt;/h1&gt;
-                &lt;h2 data-testid="homePage-info"&gt;
-                    This app is intended as a replacement for the &lt;a href="https://ucsb-cs-github-linker.herokuapp.com"&gt;ucsb-cs-github-linker&lt;/a&gt; app used in many courses at UCSB, as well as some courses at other universities.
-                &lt;/h2&gt;
-            &lt;/BasicLayout&gt;
-        &lt;/div&gt;
-    );
+    return (&lt;Form.Group&gt;
+        &lt;Form.Label htmlFor="school"&gt;School&lt;/Form.Label&gt;
+        &lt;Form.Control data-testid={`${testId}-school`} id="school"  as="select"
+          isInvalid={Boolean(errors.school)}
+          {...register("school", {required: true, minLength: 2})}
+        &gt;
+            &lt;option value=""&gt;&lt;/option&gt;
+            {schools.map(function (object, i) {
+                const key = `${testId}-option-${i}`
+                return(
+                    &lt;option key={key} data-testid={key} value={object.name}&gt;
+                        {object.name}
+                    &lt;/option&gt;
+                );
+            })}
+        &lt;/Form.Control&gt;
+        &lt;Form.Control.Feedback type="invalid"&gt;
+            {errors.school &amp;&amp; 'School is required. '}
+        &lt;/Form.Control.Feedback&gt;
+    &lt;/Form.Group&gt;);
 }
-&nbsp;</pre></td></tr></table></pre>
+&nbsp;
+export default SchoolDropdown;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
@@ -171,14 +168,14 @@ export default function HomePage() {
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at Thu May 30 2024 14:34:31 GMT-0700 (Pacific Daylight Time)
             </div>
-        <script src="../prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../sorter.js"></script>
-        <script src="../block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     
