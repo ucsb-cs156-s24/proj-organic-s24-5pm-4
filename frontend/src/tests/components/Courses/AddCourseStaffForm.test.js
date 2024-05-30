@@ -29,6 +29,20 @@ describe("AddCourseStaffForm tests", () => {
     })
     const queryClient = new QueryClient();
 
+    test("renders correctly when passing in a User", async () => {
+
+        render(
+            <QueryClientProvider client={queryClient}>
+            <Router  >
+                <AddCourseStaffForm initialContents={addCourseStaffFixtures.oneCourseStaff} />
+            </Router>
+            </QueryClientProvider>
+        );
+        await screen.findByTestId(/AddCourseStaffForm-id/);
+        expect(screen.getByText(/Id/)).toBeInTheDocument();
+        expect(screen.getByTestId(/AddCourseStaffForm-id/)).toHaveValue("1");
+    });
+
     test("renders correctly", async () => {
 
         render(

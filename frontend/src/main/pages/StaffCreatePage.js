@@ -33,7 +33,7 @@ export default function StaffCreatePage({storybook=false}) {
     }
     
     if (isSuccess && !storybook) {
-        return <Navigate to="/courses" />
+        return <Navigate to={`/courses/${id}/staff`} />
     }
 
     return (
