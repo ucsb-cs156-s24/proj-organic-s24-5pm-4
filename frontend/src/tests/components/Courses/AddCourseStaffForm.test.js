@@ -42,22 +42,6 @@ describe("AddCourseStaffForm tests", () => {
         await screen.findByText(/Create/);
     });
 
-
-    // test("renders correctly when passing in a Courses", async () => {
-
-    //     render(
-    //         <QueryClientProvider client={queryClient}>
-    //         <Router  >
-    //             <CoursesForm initialContents={coursesFixtures.oneCourse} />
-    //         </Router>
-    //         </QueryClientProvider>
-    //     );
-    //     await screen.findByTestId(/CoursesForm-id/);
-    //     expect(screen.getByText(/Id/)).toBeInTheDocument();
-    //     expect(screen.getByTestId(/CoursesForm-id/)).toHaveValue("1");
-    // });
-
-
     test("Correct Error messsages on missing input", async () => {
 
         render(
@@ -88,10 +72,10 @@ describe("AddCourseStaffForm tests", () => {
             </Router>
             </QueryClientProvider>
         );
-        await screen.findByTestId("AddCourseStaffForm-user");
+        await screen.findByTestId("AddCourseStaffForm-id");
 
-        const userField = screen.getByTestId("CoursesForm-user");
-        const submitButton = screen.getByTestId("CoursesForm-submit");
+        const userField = screen.getByTestId("AddCourseStaffForm-user");
+        const submitButton = screen.getByTestId("AddCourseStaffForm-submit");
 
         fireEvent.change(userField, { target: { value: "pconrad" } });
         fireEvent.click(submitButton);

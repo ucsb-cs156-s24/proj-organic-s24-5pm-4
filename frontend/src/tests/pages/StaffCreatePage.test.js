@@ -72,7 +72,7 @@ describe("StaffCreatePage tests", () => {
         );
 
         await waitFor(() => {
-            expect(screen.getByTestId("AddCourseStaffForm-user")).toBeInTheDocument();
+            expect(screen.getByTestId("AddCourseStaffForm-id")).toBeInTheDocument();
         });
 
         const courseIdField = screen.getByTestId("AddCourseStaffForm-courseId");
