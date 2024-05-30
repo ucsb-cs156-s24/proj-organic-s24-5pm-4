@@ -75,10 +75,10 @@ describe("StaffCreatePage tests", () => {
         );
 
         await waitFor(() => {
-            expect(screen.getByTestId("AddCourseStaffForm-user-users")).toBeInTheDocument();
+            expect(screen.getByTestId("AddCourseStaffForm-githubLogin")).toBeInTheDocument();
         });
 
-        const githubIdField = screen.getByTestId("AddCourseStaffForm-user-users");
+        const githubIdField = screen.getByTestId("AddCourseStaffForm-githubLogin");
         const submitButton = screen.getByTestId("AddCourseStaffForm-submit");
 
         fireEvent.change(githubIdField, { target: { value: 'pconrad' } });

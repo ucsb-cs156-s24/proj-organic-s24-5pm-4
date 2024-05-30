@@ -1,20 +1,20 @@
 const addCourseStaffFixtures = {
     oneCourseStaff: {
         "id": 1,
-        "users:":"pconrad"
+        "githubLogin:":"pconrad"
     },
     threeCourseStaff: [
         { 
             "id": 1,
-            "users:":"pconrad"
+            "githubLogin:":"pconrad"
         },
         {
             "id": 2,
-            "users:":"pconrad1"
+            "githubLogin:":"pconrad1"
         },
         {
             "id": 3,
-            "users:":"pconrad3"
+            "githubLogin:":"pconrad3"
         }
     ]
 };

@@ -2,17 +2,10 @@ import React from "react";
  import OurTable, { ButtonColumn } from "main/components/OurTable"
  import { useBackendMutation } from "main/utils/useBackend";
  import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/components/Utils/StaffUtils"
- import { useNavigate } from "react-router-dom";
  import { hasRole } from "main/utils/currentUser";
 
 
  export default function StaffTable({ staff, currentUser }) {
-    const navigate = useNavigate();
-
-    const editCallback = (cell) => {
-        navigate(`/courses/${cell.row.values.courseId}/editStaff`);
-    };
-
     // Stryker disable all : hard to test for query caching
 
     const deleteMutation = useBackendMutation(
@@ -42,7 +35,6 @@ import React from "react";
      ];
 
      if (hasRole(currentUser, "ROLE_ADMIN") || hasRole(currentUser, "ROLE_INSTRUCTOR")) {
-        columns.push(ButtonColumn("Edit", "primary", editCallback, "StaffTable"));
         columns.push(ButtonColumn("Delete", "danger", deleteCallback, "StaffTable"));
     }
 

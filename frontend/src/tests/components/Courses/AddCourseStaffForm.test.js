@@ -2,9 +2,6 @@ import { render, waitFor, fireEvent, screen } from "@testing-library/react";
 import AddCourseStaffForm from "main/components/Courses/AddCourseStaffForm";
 import { addCourseStaffFixtures } from "fixtures/addCourseStaffFixtures";
 import { BrowserRouter as Router } from "react-router-dom";
-import AxiosMockAdapter from "axios-mock-adapter";
-import axios from "axios";
-import usersFixtures from "../../../fixtures/usersFixtures";
 import {QueryClient, QueryClientProvider} from "react-query"; // Import the function to test
 
 const mockedNavigate = jest.fn();
@@ -14,29 +11,15 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
-const axiosMock = new AxiosMockAdapter(axios);
-
-const setupUsers = () => {
-    axiosMock.reset();
-    axiosMock.resetHistory();
-    axiosMock.onGet("/api/admin/users").reply(200, usersFixtures.threeUsers);
-}
-
 
 describe("AddCourseStaffForm tests", () => {
-    beforeEach(() => {
-        setupUsers();
-    })
     const queryClient = new QueryClient();
 
-    test("renders correctly when passing in a User", async () => {
-
+    test("renders correctly when passing in a Staff", async () => {
         render(
-            <QueryClientProvider client={queryClient}>
-            <Router  >
+            <Router>
                 <AddCourseStaffForm initialContents={addCourseStaffFixtures.oneCourseStaff} />
             </Router>
-            </QueryClientProvider>
         );
         await screen.findByTestId(/AddCourseStaffForm-id/);
         expect(screen.getByText(/Id/)).toBeInTheDocument();
@@ -52,7 +35,7 @@ describe("AddCourseStaffForm tests", () => {
             </Router>
             </QueryClientProvider>
         );
-        await screen.findByText(/User/);
+        await screen.findByText(/Github Login/);
         await screen.findByText(/Create/);
     });
 
@@ -70,8 +53,8 @@ describe("AddCourseStaffForm tests", () => {
 
         fireEvent.click(submitButton);
 
-        await screen.findByText(/User is required./);
-        expect(screen.getByText(/User is required/)).toBeInTheDocument();
+        await screen.findByText(/githubLogin is required./);
+        expect(screen.getByText(/githubLogin is required/)).toBeInTheDocument();
     });
 
     test("No Error messages on good input", async () => {
@@ -86,12 +69,12 @@ describe("AddCourseStaffForm tests", () => {
             </Router>
             </QueryClientProvider>
         );
-        await screen.findByTestId("AddCourseStaffForm-user-users");
+        await screen.findByTestId("AddCourseStaffForm-githubLogin");
 
-        const userField = screen.getByTestId("AddCourseStaffForm-user-users");
+        const ghLoginField = screen.getByTestId("AddCourseStaffForm-githubLogin");
         const submitButton = screen.getByTestId("AddCourseStaffForm-submit");
 
-        fireEvent.change(userField, { target: { value: "pconrad" } });
+        fireEvent.change(ghLoginField, { target: { value: "pconrad" } });
         fireEvent.click(submitButton);
 
         await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());

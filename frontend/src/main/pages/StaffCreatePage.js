@@ -11,7 +11,7 @@ export default function StaffCreatePage({storybook=false}) {
         method: "POST",
         params: {
         courseId: id,
-        githubLogin: staff.users
+        githubLogin: staff.githubLogin
         }
     });
 

@@ -58,11 +58,6 @@ describe("StaffTable tests", () => {
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
 
-
-    
-    const editButton = screen.queryByTestId(`${testId}-cell-row-0-col-Edit-button`);
-    expect(editButton).not.toBeInTheDocument();
-
     const deleteButton = screen.queryByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).not.toBeInTheDocument();
 
@@ -125,10 +120,6 @@ describe("StaffTable tests", () => {
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
 
-    const editButton = screen.queryByTestId(`${testId}-cell-row-0-col-Edit-button`);
-    expect(editButton).toBeInTheDocument();
-    expect(editButton).toHaveClass("btn-primary");
-
     const deleteButton = screen.queryByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
@@ -165,10 +156,6 @@ describe("StaffTable tests", () => {
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
 
-    const editButton = screen.queryByTestId(`${testId}-cell-row-0-col-Edit-button`);
-    expect(editButton).toBeInTheDocument();
-    expect(editButton).toHaveClass("btn-primary");
-
     const deleteButton = screen.queryByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
@@ -177,35 +164,6 @@ describe("StaffTable tests", () => {
     expect(totalStaffElement).toBeInTheDocument();
 
   });
-
-
-  test("Edit button navigates to the edit page for admin user", async () => {
-
-    const currentUser = currentUserFixtures.adminUser;
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <MemoryRouter>
-            <StaffTable staff={staffFixture.threeStaff} currentUser={currentUser} />
-        </MemoryRouter>
-      </QueryClientProvider>
-
-    );
-
-    await waitFor(() => { expect(screen.getByTestId(`StaffTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
-
-    const editButton = screen.getByTestId(`StaffTable-cell-row-0-col-Edit-button`);
-    expect(editButton).toBeInTheDocument();
-
-    fireEvent.click(editButton);
-
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/courses/1/editStaff'));
-    
-    const totalCoursesElement = screen.getByText("Total Staff: 3"); // Assuming there are 3 staff members in the fixture
-    expect(totalCoursesElement).toBeInTheDocument();
-    
-  });
-
 
   test("Delete button calls the callback", async () => {
 

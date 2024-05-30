@@ -1,85 +1,81 @@
 import { Button, Form, Row, Col } from 'react-bootstrap';
-import {FormProvider, useForm} from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import React from 'react';
-import {useBackend} from "../../utils/useBackend";
-import UserDropdown from '../Users/UserDropdown';
 
 function AddCourseStaffForm({ initialContents, submitAction, buttonLabel = "Create" }) {
-    // Stryker disable all
-    const formState = useForm({defaultValues:initialContents || {},})
 
+    // Stryker disable all
     const {
         register,
+        formState: { errors },
         handleSubmit,
-    } = formState;
-
-    const { data: users, error: __error, status: __status } =
-        useBackend(
-            // Stryker disable next-line all : don't test internal caching of React Query
-            ["/api/admin/users"],
-            // Stryker disable next-line all : GET is the default
-            { method: "GET", url: "/api/admin/users" },
-            []
-        );
-
+    } = useForm(
+        { defaultValues: initialContents || {}, }
+    );
+    // Stryker restore all
 
     const navigate = useNavigate();
-    
-    // Stryker restore all
-    
+
     return (
-        <FormProvider {...formState}>
-            <Form onSubmit={handleSubmit(submitAction)}>
+
+        <Form onSubmit={handleSubmit(submitAction)}>
 
 
-                <Row>
-
-                    {initialContents && (
-                        <Col>
-                            <Form.Group className="mb-3" >
-                                <Form.Label htmlFor="id">Id</Form.Label>
-                                <Form.Control
-                                    data-testid="AddCourseStaffForm-id"
-                                    id="id"
-                                    type="text"
-                                    {...register("id")}
-                                    value={initialContents.id}
-                                    disabled
-                                />
-                            </Form.Group>
-                        </Col>
-                    )}
-                </Row>
-
-                <Row>
+            <Row>
+                {initialContents && (
                     <Col>
                         <Form.Group className="mb-3" >
-                            <UserDropdown testId="AddCourseStaffForm-user" users={users}/>
+                            <Form.Label htmlFor="id">Id</Form.Label>
+                            <Form.Control
+                                data-testid="AddCourseStaffForm-id"
+                                id="id"
+                                type="text"
+                                {...register("id")}
+                                value={initialContents.id}
+                                disabled
+                            />
                         </Form.Group>
                     </Col>
-                    
-                </Row>
+                )}
+            </Row>
 
-                <Row>
-                    <Col>
-                        <Button
-                            type="submit"
-                            data-testid="AddCourseStaffForm-submit"
-                        >
-                            {buttonLabel}
-                        </Button>
-                        <Button
-                            variant="Secondary"
-                            onClick={() => navigate(-1)}
-                            data-testid="AddCourseStaffForm-cancel"
-                        >
-                            Cancel
-                        </Button>
-                    </Col>
-                </Row>
-            </Form>
-        </FormProvider>
+            <Row>
+                <Col>
+                    <Form.Group className="mb-3" >
+                        <Form.Label htmlFor="githubLogin">Github Login</Form.Label>
+                        <Form.Control
+                            data-testid="AddCourseStaffForm-githubLogin"
+                            id="githubLogin"
+                            type="text"
+                            isInvalid={Boolean(errors.githubLogin)}
+                            {...register("githubLogin", { required: true })}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.githubLogin && 'githubLogin is required. '}
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Col>
+            </Row>
+
+            <Row>
+                <Col>
+                    <Button
+                        type="submit"
+                        data-testid="AddCourseStaffForm-submit"
+                    >
+                        {buttonLabel}
+                    </Button>
+                    <Button
+                        variant="Secondary"
+                        onClick={() => navigate(-1)}
+                        data-testid="AddCourseStaffForm-cancel"
+                    >
+                        Cancel
+                    </Button>
+                </Col>
+            </Row>
+        </Form>
+
     )
 }
 
