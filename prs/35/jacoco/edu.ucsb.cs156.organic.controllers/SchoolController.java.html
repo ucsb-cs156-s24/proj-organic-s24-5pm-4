@@ -101,7 +101,7 @@ import edu.ucsb.cs156.organic.repositories.UserRepository;
 <span class="fc" id="L101">                .orElseThrow(() -&gt; new EntityNotFoundException(School.class, abbrev));</span>
 
 <span class="fc" id="L103">        schoolRepository.delete(school);</span>
-<span class="fc" id="L104">        return genericMessage(&quot;School with id %s deleted&quot;.formatted(abbrev));</span>
+<span class="fc" id="L104">        return genericMessage(&quot;School with abbrev %s deleted&quot;.formatted(abbrev));</span>
     }
 
 
