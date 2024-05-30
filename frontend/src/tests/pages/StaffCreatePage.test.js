@@ -8,6 +8,7 @@ import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
+import usersFixtures from "fixtures/usersFixtures";
 
 const mockToast = jest.fn();
 jest.mock('react-toastify', () => {
@@ -29,6 +30,18 @@ jest.mock('react-router-dom', () => {
     };
 });
 
+jest.mock('react-router-dom', () => {
+    const originalModule = jest.requireActual('react-router-dom');
+    return {
+        __esModule: true,
+        ...originalModule,
+        useParams: () => ({
+            id: 17
+        }),
+        Navigate: (x) => { mockNavigate(x); return null; }
+    };
+});
+
 describe("StaffCreatePage tests", () => {
 
     const axiosMock =new AxiosMockAdapter(axios);
@@ -39,6 +52,7 @@ describe("StaffCreatePage tests", () => {
         axiosMock.resetHistory();
         axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
         axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
+        axiosMock.onGet("/api/admin/users").reply(200, usersFixtures.threeUsers);
     });
 
     const queryClient = new QueryClient();
@@ -72,14 +86,12 @@ describe("StaffCreatePage tests", () => {
         );
 
         await waitFor(() => {
-            expect(screen.getByTestId("AddCourseStaffForm-id")).toBeInTheDocument();
+            expect(screen.getByTestId("AddCourseStaffForm-user-users")).toBeInTheDocument();
         });
 
-        const courseIdField = screen.getByTestId("AddCourseStaffForm-courseId");
-        const githubIdField = screen.getByTestId("AddCourseStaffForm-githubId");
+        const githubIdField = screen.getByTestId("AddCourseStaffForm-user-users");
         const submitButton = screen.getByTestId("AddCourseStaffForm-submit");
 
-        fireEvent.change(courseIdField, { target: { value: 1 } });
         fireEvent.change(githubIdField, { target: { value: 'scottpchow23' } });
 
         expect(submitButton).toBeInTheDocument();

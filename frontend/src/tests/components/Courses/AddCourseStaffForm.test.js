@@ -72,9 +72,9 @@ describe("AddCourseStaffForm tests", () => {
             </Router>
             </QueryClientProvider>
         );
-        await screen.findByTestId("AddCourseStaffForm-id");
+        await screen.findByTestId("AddCourseStaffForm-user-users");
 
-        const userField = screen.getByTestId("AddCourseStaffForm-user");
+        const userField = screen.getByTestId("AddCourseStaffForm-user-users");
         const submitButton = screen.getByTestId("AddCourseStaffForm-submit");
 
         fireEvent.change(userField, { target: { value: "pconrad" } });
