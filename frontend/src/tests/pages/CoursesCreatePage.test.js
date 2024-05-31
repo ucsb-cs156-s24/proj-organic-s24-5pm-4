@@ -8,6 +8,7 @@ import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
+import {schoolsFixtures} from "../../fixtures/schoolsFixtures";
 
 const mockToast = jest.fn();
 jest.mock('react-toastify', () => {
@@ -39,6 +40,7 @@ describe("CourseCreatePage tests", () => {
         axiosMock.resetHistory();
         axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
         axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
+        axiosMock.onGet("/api/schools/all").reply(200, schoolsFixtures.threeSchools);
     });
 
     const queryClient = new QueryClient();
@@ -58,7 +60,7 @@ describe("CourseCreatePage tests", () => {
         const course = {
             id: 1,
             name: "CS156",
-            school: "UCSB",
+            school: "UC Santa Barbara",
             term: "F23",
             startDate: "2023-09-24T12:00:00",
             endDate: "2023-12-15T12:00:00",
@@ -88,7 +90,7 @@ describe("CourseCreatePage tests", () => {
         const submitButton = screen.getByTestId("CoursesForm-submit");
 
         fireEvent.change(nameField, { target: { value: 'CS156' } });
-        fireEvent.change(schoolField, { target: { value: 'UCSB' } });
+        fireEvent.change(schoolField, { target: { value: 'UC Santa Barbara' } });
         fireEvent.change(termField, { target: { value: 'F23' } });
         fireEvent.change(startDateField, { target: { value: '2023-09-24T12:00:00' } });
         fireEvent.change(endDateField, { target: { value: '2023-12-15T12:00:00' } });
@@ -103,7 +105,7 @@ describe("CourseCreatePage tests", () => {
         expect(axiosMock.history.post[0].params).toEqual(
             {
                 "name": "CS156",
-                "school": "UCSB",
+                "school": "UC Santa Barbara",
                 "term": "F23",
                 "startDate": "2023-09-24T12:00",
                 "endDate": "2023-12-15T12:00",

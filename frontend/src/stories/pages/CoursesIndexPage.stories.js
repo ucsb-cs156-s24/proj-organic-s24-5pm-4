@@ -4,14 +4,14 @@ import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { coursesFixtures } from "fixtures/coursesFixtures";
 import { rest } from "msw";
 
-import CourseIndexPage from "main/pages/CourseIndexPage";
+import CoursesIndexPage from "main/pages/CoursesIndexPage";
 
 export default {
-    title: 'pages/Course/CourseIndexPage',
-    component: CourseIndexPage
+    title: 'pages/Courses/CoursesIndexPage',
+    component: CoursesIndexPage
 };
 
-const Template = () => <CourseIndexPage storybook={true}/>;
+const Template = () => <CoursesIndexPage storybook={true}/>;
 
 export const Empty = Template.bind({});
 Empty.parameters = {

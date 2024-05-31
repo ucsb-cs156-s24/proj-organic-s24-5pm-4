@@ -5,7 +5,7 @@ import CoursesTable from 'main/components/Courses/CoursesTable';
 import { Button } from 'react-bootstrap';
 import { useCurrentUser, hasRole} from 'main/utils/currentUser';
 
-export default function CourseIndexPage() {
+export default function CoursesIndexPage() {
 
   const { data: currentUser } = useCurrentUser();
   const createButton = () => {  

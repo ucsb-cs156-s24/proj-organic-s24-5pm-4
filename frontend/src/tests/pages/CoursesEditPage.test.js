@@ -8,6 +8,7 @@ import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 
 import mockConsole from "jest-mock-console";
+import {schoolsFixtures} from "../../fixtures/schoolsFixtures";
 
 const mockToast = jest.fn();
 jest.mock('react-toastify', () => {
@@ -48,6 +49,7 @@ describe("CoursesEditPage tests", () => {
             axiosMock.resetHistory();
             axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
             axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
+            axiosMock.onGet("/api/schools/all").timeout();
             axiosMock.onGet("/api/courses/get", { params: { id: 17 } }).timeout();
         });
 
@@ -78,10 +80,11 @@ describe("CoursesEditPage tests", () => {
             axiosMock.resetHistory();
             axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
             axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
+            axiosMock.onGet("/api/schools/all").reply(200, schoolsFixtures.threeSchools);
             axiosMock.onGet("/api/courses/get", { params: { id: 17 } }).reply(200, {
                 id: 17,
                 name: "CS 156",
-                school: "UCSB",
+                school: "UC Santa Barbara",
                 term: "f23",
                 startDate: "2023-09-29T00:00",
                 endDate: "2023-12-15T00:00",
@@ -90,7 +93,7 @@ describe("CoursesEditPage tests", () => {
             axiosMock.onPut('/api/courses/update').reply(200, {
                 id: "17",
                 name: "CS 148",
-                school: "UCSB",
+                school: "UC Santa Barbara",
                 term: "w23",
                 startDate: "2024-01-10T00:00",
                 endDate: "2023-03-12T00:00",
@@ -132,7 +135,7 @@ describe("CoursesEditPage tests", () => {
 
             expect(idField).toHaveValue("17");
             expect(nameField).toHaveValue("CS 156");
-            expect(schoolField).toHaveValue("UCSB");
+            expect(schoolField).toHaveValue("UC Santa Barbara");
             expect(termField).toHaveValue("f23");
             expect(startField).toHaveValue("2023-09-29T00:00");
             expect(endField).toHaveValue("2023-12-15T00:00");
@@ -163,7 +166,7 @@ describe("CoursesEditPage tests", () => {
 
             expect(idField).toHaveValue("17");
             expect(nameField).toHaveValue("CS 156");
-            expect(schoolField).toHaveValue("UCSB");
+            expect(schoolField).toHaveValue("UC Santa Barbara");
             expect(termField).toHaveValue("f23");
             expect(startField).toHaveValue("2023-09-29T00:00");
             expect(endField).toHaveValue("2023-12-15T00:00");
@@ -171,7 +174,7 @@ describe("CoursesEditPage tests", () => {
             expect(submitButton).toBeInTheDocument();
 
             fireEvent.change(nameField, { target: { value: "CS 148" } })
-            fireEvent.change(schoolField, { target: { value: "UCSB" } })
+            fireEvent.change(schoolField, { target: { value: "University of Minnesota" } })
             fireEvent.change(termField, { target: { value: "w23" } })
             fireEvent.change(startField, { target: { value: "2024-01-10T00:00" } })
             fireEvent.change(endField, { target: { value: "2023-03-12T00:00" } })
@@ -184,7 +187,7 @@ describe("CoursesEditPage tests", () => {
             expect(mockNavigate).toBeCalledWith({ "to": "/courses" });
 
             expect(axiosMock.history.put.length).toBe(1); // times called
-            expect(axiosMock.history.put[0].params).toEqual({ id: 17, name: "CS 148", endDate: "2023-03-12T00:00", startDate: "2024-01-10T00:00", school: "UCSB", term: "w23", githubOrg: "ucsb-cs156-w23" });
+            expect(axiosMock.history.put[0].params).toEqual({ id: 17, name: "CS 148", endDate: "2023-03-12T00:00", startDate: "2024-01-10T00:00", school: "University of Minnesota", term: "w23", githubOrg: "ucsb-cs156-w23" });
 
         });
 

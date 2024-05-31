@@ -35,14 +35,14 @@ function App() {
   const userRoutes = hasRole(currentUser, "ROLE_USER") ? (
     <>
       <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/courses" element={<CourseIndexPage />} />
+      <Route path="/courses" element={<CoursesIndexPage />} />
     </>
   ) : null;
 
   const courseRoutes = (hasRole(currentUser, "ROLE_ADMIN") || hasRole(currentUser, "ROLE_INSTRUCTOR")) ? (
     <>
       <Route path="/courses/create" element={<CoursesCreatePage />} />
-      <Route path="/courses" element={<CourseIndexPage />} />
+      <Route path="/courses" element={<CoursesIndexPage />} />
       <Route path="/courses/edit/:id" element={<CoursesEditPage />} />
       <Route path="/courses/:id/staff" element={<CoursesStaffPage />} />
       <Route path="/courses/:id/addStaff" element={<StaffCreatePage />} />

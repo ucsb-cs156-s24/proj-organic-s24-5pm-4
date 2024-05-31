@@ -2,6 +2,7 @@ package edu.ucsb.cs156.organic.services;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import edu.ucsb.cs156.organic.models.SystemInfo;
 
-// The unit under test relies on property values
+// The unit under test relies on property values 
 // For hints on testing, see: https://www.baeldung.com/spring-boot-testing-configurationproperties
 
 
@@ -30,6 +31,19 @@ class SystemInfoServiceImplTests  {
     assertTrue(si.getSpringH2ConsoleEnabled());
     assertTrue(si.getShowSwaggerUILink());
     assertEquals("https://github.com/ucsb-cs156/proj-organic", si.getSourceRepo());
+    assertTrue(si.getGithubUrl().startsWith(si.getSourceRepo()));
+    assertTrue(si.getGithubUrl().endsWith(si.getCommitId()));
+    assertTrue(si.getGithubUrl().contains("/commit/"));
   }
+  @Test
+  void test_githubUrl() {
+    assertEquals(
+        SystemInfoServiceImpl.githubUrl(
+            "https://github.com/ucsb-cs156-s24/proj-organic-s24-5pm-4", "abcdef12345"),
+        "https://github.com/ucsb-cs156-s24/proj-organic-s24-5pm-4/commit/abcdef12345");
+    assertNull(SystemInfoServiceImpl.githubUrl(null, null));
+    assertNull(SystemInfoServiceImpl.githubUrl("x", null));
+    assertNull(SystemInfoServiceImpl.githubUrl(null, "x"));
 
+}
 }

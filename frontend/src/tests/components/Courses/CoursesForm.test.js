@@ -2,7 +2,11 @@ import { render, waitFor, fireEvent, screen } from "@testing-library/react";
 import CoursesForm from "main/components/Courses/CoursesForm";
 import { coursesFixtures } from "fixtures/coursesFixtures";
 import { BrowserRouter as Router } from "react-router-dom";
-import { enableEndDateValidation } from "main/components/Courses/dateValidation"; // Import the function to test
+import { enableEndDateValidation } from "main/components/Courses/dateValidation";
+import AxiosMockAdapter from "axios-mock-adapter";
+import axios from "axios";
+import {schoolsFixtures} from "../../../fixtures/schoolsFixtures";
+import {QueryClient, QueryClientProvider} from "react-query"; // Import the function to test
 
 const mockedNavigate = jest.fn();
 
@@ -14,12 +18,28 @@ jest.mock('react-router-dom', () => ({
 jest.mock("main/components/Courses/dateValidation", () => ({
     enableEndDateValidation: jest.fn(), // Mock the function
   }));
-  
+
+const axiosMock = new AxiosMockAdapter(axios);
+
+const setupSchools = () => {
+    axiosMock.reset();
+    axiosMock.resetHistory();
+    axiosMock.onGet("/api/schools/all").reply(200, schoolsFixtures.threeSchools);
+}
+
 
 describe("CoursesForm tests", () => {
-
+    beforeEach(() => {
+        setupSchools();
+    })
+    const queryClient = new QueryClient();
     test("calls enableEndDateValidation on mount", () => {
-        render(<CoursesForm />);
+        render(
+        <QueryClientProvider client={queryClient}>
+            <Router  >
+                <CoursesForm />
+            </Router>
+        </QueryClientProvider>);
     
         expect(enableEndDateValidation).toHaveBeenCalled();
       });
@@ -27,9 +47,11 @@ describe("CoursesForm tests", () => {
     test("renders correctly", async () => {
 
         render(
+            <QueryClientProvider client={queryClient}>
             <Router  >
                 <CoursesForm />
             </Router>
+            </QueryClientProvider>
         );
         await screen.findByText(/Name/);
         await screen.findByText(/Create/);
@@ -39,9 +61,11 @@ describe("CoursesForm tests", () => {
     test("renders correctly when passing in a Courses", async () => {
 
         render(
+            <QueryClientProvider client={queryClient}>
             <Router  >
                 <CoursesForm initialContents={coursesFixtures.oneCourse} />
             </Router>
+            </QueryClientProvider>
         );
         await screen.findByTestId(/CoursesForm-id/);
         expect(screen.getByText(/Id/)).toBeInTheDocument();
@@ -52,9 +76,11 @@ describe("CoursesForm tests", () => {
     test("Correct Error messsages on missing input", async () => {
 
         render(
+            <QueryClientProvider client={queryClient}>
             <Router  >
                 <CoursesForm />
             </Router>
+            </QueryClientProvider>
         );
         await screen.findByTestId("CoursesForm-submit");
         const submitButton = screen.getByTestId("CoursesForm-submit");
@@ -70,15 +96,17 @@ describe("CoursesForm tests", () => {
         expect(screen.getByText(/GithubOrg is required./)).toBeInTheDocument();
     });
 
-    test("No Error messsages on good input", async () => {
+    test("No Error messages on good input", async () => {
 
         const mockSubmitAction = jest.fn();
 
 
         render(
+            <QueryClientProvider client={queryClient}>
             <Router  >
                 <CoursesForm submitAction={mockSubmitAction} />
             </Router>
+            </QueryClientProvider>
         );
         await screen.findByTestId("CoursesForm-name");
 
@@ -91,7 +119,7 @@ describe("CoursesForm tests", () => {
         const submitButton = screen.getByTestId("CoursesForm-submit");
 
         fireEvent.change(nameField, { target: { value: "CMPSC 156" } });
-        fireEvent.change(schoolField, { target: { value: 'ucsb' } });
+        fireEvent.change(schoolField, { target: { value: 'UC Santa Barbara' } });
         fireEvent.change(termField, { target: { value: 'f23' } });
         fireEvent.change(startDateField, { target: { value: '2022-01-02T12:00' } });
         fireEvent.change(endDateField, { target: { value: '2022-02-02T12:00' } });
@@ -109,9 +137,11 @@ describe("CoursesForm tests", () => {
     test("that navigate(-1) is called when Cancel is clicked", async () => {
 
         render(
+            <QueryClientProvider client={queryClient}>
             <Router  >
                 <CoursesForm />
             </Router>
+            </QueryClientProvider>
         );
         await screen.findByTestId("CoursesForm-cancel");
         const cancelButton = screen.getByTestId("CoursesForm-cancel");

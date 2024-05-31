@@ -1,7 +1,7 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
-import CourseIndexPage from "main/pages/CourseIndexPage";
+import CoursesIndexPage from "main/pages/CoursesIndexPage";
 
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
@@ -22,7 +22,7 @@ jest.mock('react-toastify', () => {
     };
 });
 
-describe("CourseIndexPage tests", () => {
+describe("CoursesIndexPage tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
 
@@ -59,7 +59,7 @@ describe("CourseIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CourseIndexPage />
+                    <CoursesIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -83,7 +83,7 @@ describe("CourseIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CourseIndexPage />
+                    <CoursesIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -107,7 +107,7 @@ describe("CourseIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CourseIndexPage />
+                    <CoursesIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -128,7 +128,7 @@ describe("CourseIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CourseIndexPage />
+                    <CoursesIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -150,7 +150,7 @@ describe("CourseIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CourseIndexPage />
+                    <CoursesIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -173,7 +173,7 @@ describe("CourseIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CourseIndexPage />
+                    <CoursesIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -197,7 +197,7 @@ describe("CourseIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CourseIndexPage />
+                    <CoursesIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -221,7 +221,7 @@ describe("CourseIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CourseIndexPage />
+                    <CoursesIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -253,7 +253,7 @@ describe("CourseIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CourseIndexPage />
+                    <CoursesIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -284,7 +284,7 @@ describe("CourseIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CourseIndexPage />
+                    <CoursesIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
