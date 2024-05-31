@@ -25,7 +25,7 @@ function SchoolForm({ initialContents, submitAction, buttonLabel = "Create" }) {
             <Row>
                 <Col>
                     <Form.Group className="mb-3" >
-                        <Form.Label htmlFor="abbrev">Abbreviation</Form.Label>
+                        <Form.Label htmlFor="abbrev">Abbreviation (should be all lowercase)</Form.Label>
                         <Form.Control
                             data-testid="SchoolForm-abbrev"
                             id="abbrev"
@@ -56,7 +56,7 @@ function SchoolForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                 </Col>
                 <Col>
                     <Form.Group className="mb-3" >
-                        <Form.Label htmlFor="termRegex">Term Regex</Form.Label>
+                        <Form.Label htmlFor="termRegex">Term Regex (Regex format for Terms) Example: [WSMF]\d\d</Form.Label>
                         <Form.Control
                             data-testid="SchoolForm-termRegex"
                             id="termRegex"
@@ -74,9 +74,8 @@ function SchoolForm({ initialContents, submitAction, buttonLabel = "Create" }) {
             <Row>
                 <Col>
                     <Form.Group className="mb-3" >
-                        <Form.Label htmlFor="termDescription">Term Description</Form.Label>
+                        <Form.Label htmlFor="termDescription">Term Description (Quarter, Semester or Session)</Form.Label>
                         <Form.Control
-                            data-testid="SchoolForm-termDescription"
                             id="termDescription"
                             type="text"
                             isInvalid={Boolean(errors.termDescription)}
