@@ -14,7 +14,7 @@ import AdminJobsPage from "main/pages/AdminJobsPage";
 import SchoolIndexPage from "main/pages/SchoolIndexPage";
 
 import CoursesCreatePage from "main/pages/CoursesCreatePage";
-import CourseIndexPage from "main/pages/CourseIndexPage";
+import CoursesIndexPage from "main/pages/CoursesIndexPage";
 import CoursesStaffPage from "main/pages/CoursesStaffPage";
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
