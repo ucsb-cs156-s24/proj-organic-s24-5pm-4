@@ -88,7 +88,7 @@ function SchoolForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                 </Col>
             </Row>
 
-            <Row>
+            {/* <Row>
                 <Col>
                     <Form.Group className="mb-3" >
                         <Form.Label htmlFor="termError">Term Error</Form.Label>
@@ -104,7 +104,7 @@ function SchoolForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
-            </Row>
+            </Row> */}
 
             <Row>
                 <Col>

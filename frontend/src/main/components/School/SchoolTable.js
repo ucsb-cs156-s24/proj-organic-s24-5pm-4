@@ -45,10 +45,10 @@ import React from "react";
              Header: 'TermDescription',
              accessor: 'termDescription',
          },
-         {
-             Header: 'TermError',
-             accessor: 'termError',
-         },
+        //  {
+        //      Header: 'TermError',
+        //      accessor: 'termError',
+        //  },
      ];
 
      if (hasRole(currentUser, "ROLE_ADMIN")) {
