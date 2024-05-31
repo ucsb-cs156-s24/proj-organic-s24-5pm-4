@@ -62,7 +62,6 @@ describe("SchoolCreatePage tests", () => {
             name: "UC Santa Barbara",
             termRegex: "[wsmf]\\d\\d",
             termDescription: "s24",
-            termError: "test"
         };
 
         axiosMock.onPost("/api/schools/post").reply(200, school);
@@ -82,7 +81,6 @@ describe("SchoolCreatePage tests", () => {
         const nameField = screen.getByTestId("SchoolForm-name");
         const termRegexField = screen.getByTestId("SchoolForm-termRegex");
         const termDescriptionField = screen.getByTestId("SchoolForm-termDescription");
-        const termErrorField = screen.getByTestId("SchoolForm-termError");
         const submitButton = screen.getByTestId("SchoolForm-submit");
 
 
@@ -90,7 +88,6 @@ describe("SchoolCreatePage tests", () => {
         fireEvent.change(nameField, { target: { value: 'UC Santa Barbara' } });
         fireEvent.change(termRegexField, { target: { value: '[wsmf]\\d\\d' } });
         fireEvent.change(termDescriptionField, { target: { value: 's24' } });
-        fireEvent.change(termErrorField, { target: { value: 'test' } });
 
 
         fireEvent.click(submitButton);
@@ -103,7 +100,6 @@ describe("SchoolCreatePage tests", () => {
                 "name": "UC Santa Barbara",
                 "termRegex": "[wsmf]\\d\\d",
                 "termDescription": "s24",
-                "termError": "test"
         }));
 
         expect(mockToast).toBeCalledWith("New school created - id: ucsb");

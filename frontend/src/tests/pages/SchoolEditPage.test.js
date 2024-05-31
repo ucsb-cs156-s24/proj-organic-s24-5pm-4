@@ -78,14 +78,12 @@ describe("SchoolEditPage tests", () => {
                 name: "UC Santa Barbara",
                 termRegex: "[wsmf]\\d\\d",
                 termDescription: "s24",
-                termError: "test" 
             });
             axiosMock.onPut('/api/schools/update').reply(200, {
                 abbrev: "ucsb", // we do not want to change the abbrev as it is our new key param instead of id
                 name: "Edited UC Santa Barbara",
                 termRegex: "[wsmf]\\d\\d",
                 termDescription: "f24",
-                termError: "edited_test" 
             });
         });
 
@@ -116,7 +114,6 @@ describe("SchoolEditPage tests", () => {
             const nameField = screen.getByTestId("SchoolForm-name");
             const termRegexField = screen.getByTestId("SchoolForm-termRegex");
             const termDescriptionField = screen.getByTestId("SchoolForm-termDescription");
-            const termErrorField = screen.getByTestId("SchoolForm-termError");
             const submitButton = screen.getByTestId("SchoolForm-submit");
 
             expect(abbrevField).toBeInTheDocument();
@@ -127,15 +124,13 @@ describe("SchoolEditPage tests", () => {
             expect(termRegexField).toHaveValue("[wsmf]\\d\\d");
             expect(termDescriptionField).toBeInTheDocument();
             expect(termDescriptionField).toHaveValue("s24");
-            expect(termErrorField).toBeInTheDocument();
-            expect(termErrorField).toHaveValue("test");
+
 
             expect(submitButton).toHaveTextContent("Update");
 
             fireEvent.change(nameField, { target: { value: "Edited UC Santa Barbara" } });
             fireEvent.change(termRegexField, { target: { value: "[wsmf]\\d\\d" } });
             fireEvent.change(termDescriptionField, { target: { value: "f24" } });
-            fireEvent.change(termErrorField, { target: { value: "edited_test" } });
             fireEvent.click(submitButton);
 
             await waitFor(() => expect(mockToast).toBeCalled());
@@ -149,7 +144,6 @@ describe("SchoolEditPage tests", () => {
                 name: "Edited UC Santa Barbara",
                 termRegex: "[wsmf]\\d\\d",
                 termDescription: "f24",
-                termError: "edited_test" 
             })); 
         });
 
@@ -167,20 +161,16 @@ describe("SchoolEditPage tests", () => {
             const nameField = screen.getByTestId("SchoolForm-name");
             const termRegexField = screen.getByTestId("SchoolForm-termRegex");
             const termDescriptionField = screen.getByTestId("SchoolForm-termDescription");
-            const termErrorField = screen.getByTestId("SchoolForm-termError");
             const submitButton = screen.getByTestId("SchoolForm-submit");
 
-    
             expect(abbrevField).toHaveValue("ucsb");
             expect(nameField).toHaveValue("UC Santa Barbara");
             expect(termRegexField).toHaveValue("[wsmf]\\d\\d");
             expect(termDescriptionField).toHaveValue("s24");
-            expect(termErrorField).toHaveValue("test");
 
             fireEvent.change(nameField, { target: { value: "Edited UC Santa Barbara" } });
             fireEvent.change(termRegexField, { target: { value: "[wsmf]\\d\\d" } });
             fireEvent.change(termDescriptionField, { target: { value: "f24" } });
-            fireEvent.change(termErrorField, { target: { value: "edited_test" } });
             fireEvent.click(submitButton);
 
             await waitFor(() => expect(mockToast).toBeCalled());
