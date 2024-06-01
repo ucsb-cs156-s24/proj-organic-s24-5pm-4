@@ -118,13 +118,9 @@ import edu.ucsb.cs156.organic.repositories.UserRepository;
 <span class="fc" id="L118">            throw new IllegalArgumentException(&quot;Invalid abbrev format. Abbrev must be all lowercase&quot;);</span>
         }
 
-<span class="fc bfc" id="L121" title="All 2 branches covered.">        if (!school.getTermDescription().matches(school.getTermRegex())) {</span>
-<span class="fc" id="L122">            throw new IllegalArgumentException(&quot;Invalid termDescription format. It must follow the pattern &quot; + school.getTermRegex());</span>
-        }
+<span class="fc" id="L121">        School savedSchool = schoolRepository.save(school);</span>
 
-<span class="fc" id="L125">        School savedSchool = schoolRepository.save(school);</span>
-
-<span class="fc" id="L127">        return savedSchool;</span>
+<span class="fc" id="L123">        return savedSchool;</span>
     }
 
 }
