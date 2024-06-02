@@ -9,6 +9,27 @@
 
 # W24 Production Deployments
 
+## Partial pitest runs
+
+This repo has support for partial pitest runs
+
+For example, to run pitest on just one class, use:
+
+```
+mvn pitest:mutationCoverage -DtargetClasses=edu.ucsb.cs156.organic.controllers.JobsController
+```
+
+To run pitest on just one package, use:
+
+```
+mvn pitest:mutationCoverage -DtargetClasses=edu.ucsb.cs156.organic.controllers.\*
+```
+
+To run full mutation test coverage, as usual, use:
+
+```
+mvn pitest:mutationCoverage
+```
 
 | Team | Link       | 
 |------|------------|

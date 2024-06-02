@@ -4,6 +4,7 @@ import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { rest } from "msw";
 
 import CoursesCreatePage from "main/pages/CoursesCreatePage";
+import {schoolsFixtures} from "../../fixtures/schoolsFixtures";
 
 export default {
     title: 'pages/Courses/CoursesCreatePage',
@@ -24,6 +25,9 @@ Default.parameters = {
         rest.post('/api/courses/post', (req, res, ctx) => {
             window.alert("POST: " + JSON.stringify(req.url));
             return res(ctx.status(200),ctx.json({}));
+        }),
+        rest.get('/api/schools/all', (_req, res, ctx) => {
+            return res(ctx.json(schoolsFixtures.threeSchools));
         }),
     ]
 }

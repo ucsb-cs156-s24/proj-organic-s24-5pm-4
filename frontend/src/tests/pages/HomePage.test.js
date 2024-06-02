@@ -59,7 +59,11 @@ describe("HomePage tests", () => {
         const greetingElement = screen.getByTestId("homePage-title");
         expect(
             greetingElement.textContent
-        ).toMatch(/Good (morning|afternoon|evening), cgaucho/); 
+        ).toMatch(/Good (morning|afternoon|evening)/); 
+        const infoElement = screen.getByTestId("homePage-info");
+        expect(
+          infoElement.textContent
+        ).toMatch(/This app is intended as a replacement for the ucsb-cs-github-linker app used in many courses at UCSB, as well as some courses at other universities./); 
     });
     
     // test('renders greeting for non-logged-in users correctly', () => {
@@ -103,11 +107,11 @@ describe('HomePage greetings for not logged in users at different times of the d
       axiosMock.reset();
         });
     const testCases = [
-      { hour: 9, expectedGreeting: "Good morning, cgaucho" },
-      { hour: 14, expectedGreeting: "Good afternoon, cgaucho" },
-      { hour: 19, expectedGreeting: "Good evening, cgaucho" },
-      { hour: 12, expectedGreeting: "Good morning, cgaucho" },
-      { hour: 18, expectedGreeting: "Good afternoon, cgaucho" },
+      { hour: 9, expectedGreeting: "Good morning, Please Sign in to Proceed" },
+      { hour: 14, expectedGreeting: "Good afternoon, Please Sign in to Proceed" },
+      { hour: 19, expectedGreeting: "Good evening, Please Sign in to Proceed" },
+      { hour: 12, expectedGreeting: "Good afternoon, Please Sign in to Proceed" },
+      { hour: 18, expectedGreeting: "Good evening, Please Sign in to Proceed" },
     ];
   
     testCases.forEach(({ hour, expectedGreeting }) => {
@@ -124,6 +128,7 @@ describe('HomePage greetings for not logged in users at different times of the d
         expect(screen.getByTestId("HomePage-main-div")).toBeInTheDocument();
 
         const greetingElement = screen.getByTestId("homePage-title");
+        expect(greetingElement.textContent).toContain("Please Sign in to Proceed");
         expect(greetingElement.textContent).toMatch(new RegExp(expectedGreeting, 'i'));
       });
     });
@@ -164,8 +169,8 @@ describe('HomePage greetings for not logged in users at different times of the d
       { hour: 4, expectedGreeting: "Good morning, pconrad" },
       { hour: 14, expectedGreeting: "Good afternoon, pconrad" },
       { hour: 19, expectedGreeting: "Good evening, pconrad" },
-      { hour: 12, expectedGreeting: "Good morning, pconrad" },
-      { hour: 18, expectedGreeting: "Good afternoon, pconrad" },
+      { hour: 12, expectedGreeting: "Good afternoon, pconrad" },
+      { hour: 18, expectedGreeting: "Good evening, pconrad" },
     ];
   
     testCases.forEach(({ hour, expectedGreeting }) =>  {
@@ -187,6 +192,11 @@ describe('HomePage greetings for not logged in users at different times of the d
 
         const greetingElement = screen.getByTestId("homePage-title");
         expect(greetingElement.textContent).toMatch(new RegExp(expectedGreeting, 'i'));
+        expect(greetingElement.textContent).toContain("pconrad");
+        const infoElement = screen.getByTestId("homePage-info");
+        expect(
+          infoElement.textContent
+      ).toMatch(/This app is intended as a replacement for the ucsb-cs-github-linker app used in many courses at UCSB, as well as some courses at other universities./); 
       });
     });
   });

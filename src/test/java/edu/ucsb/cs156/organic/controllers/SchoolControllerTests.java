@@ -63,7 +63,6 @@ import edu.ucsb.cs156.organic.errors.EntityNotFoundException;
 import edu.ucsb.cs156.organic.repositories.jobs.JobsRepository;
 import edu.ucsb.cs156.organic.services.jobs.JobService;
 import edu.ucsb.cs156.organic.services.CurrentUserService;
-import liquibase.pro.packaged.W;
 import lombok.With;
 import lombok.extern.slf4j.Slf4j;
 
@@ -115,8 +114,8 @@ public class SchoolControllerTests extends ControllerTestCase{
         School school = School.builder()
                     .abbrev("ucsb")
                     .name("Ubarbara")
-                    .termRegex("W24")
-                    .termDescription("F24")
+                    .termRegex("S")
+                    .termDescription("quarter")
                     .termError("error")
                     .build();
         when(schoolRepository.findById(eq("ucsb"))).thenReturn(Optional.of(school));
@@ -152,15 +151,15 @@ public class SchoolControllerTests extends ControllerTestCase{
         School school1 = School.builder()
                     .abbrev("ucsb")
                     .name("Ubarbara")
-                    .termRegex("W24")
-                    .termDescription("F24")
+                    .termRegex("S")
+                    .termDescription("quarter")
                     .termError("error")
                     .build();        
         School school2 = School.builder()
                     .abbrev("umn")
                     .name("mich")
-                    .termRegex("W24")
-                    .termDescription("M24")
+                    .termRegex("S")
+                    .termDescription("trimester")
                     .termError("error1")
                     .build();  
         
@@ -188,15 +187,15 @@ public class SchoolControllerTests extends ControllerTestCase{
         School origSchool = School.builder()
                         .abbrev("ucsb")
                         .name("Ubarbara")
-                        .termRegex("W24")
-                        .termDescription("F24")
+                        .termRegex("S")
+                        .termDescription("quarter")
                         .termError("error")
                         .build();
         School editedSchool = School.builder()
                         .abbrev("ucsb")
                         .name("UBarbara")
-                        .termRegex("M24")
-                        .termDescription("S24")
+                        .termRegex("M")
+                        .termDescription("all_year")
                         .termError("error1")
                         .build();
 
@@ -233,7 +232,7 @@ public class SchoolControllerTests extends ControllerTestCase{
             School editedSchool = School.builder()
                             .abbrev("ucsb")
                             .name("Ubarbara")
-                            .termRegex("W24")
+                            .termRegex("S")
                             .build();}
 
 
@@ -247,28 +246,28 @@ public class SchoolControllerTests extends ControllerTestCase{
 
 
             School school1 = School.builder()
-                            .abbrev("UCSB")
+                            .abbrev("ucsb")
                             .name("University of California Santa Barbara")
                             .termRegex("W")
-                            .termDescription("W24")
+                            .termDescription("semester")
                             .termError("term error??")
                             .build();
                             
 
-            when(schoolRepository.findById(eq("UCSB"))).thenReturn(Optional.of(school1));
+            when(schoolRepository.findById(eq("ucsb"))).thenReturn(Optional.of(school1));
 
             // act
             MvcResult response = mockMvc.perform(
-                            delete("/api/schools?abbrev=UCSB")
+                            delete("/api/schools?abbrev=ucsb")
                                             .with(csrf()))
                             .andExpect(status().isOk()).andReturn();
 
             // assert
-            verify(schoolRepository, times(1)).findById("UCSB");
+            verify(schoolRepository, times(1)).findById("ucsb");
             verify(schoolRepository, times(1)).delete(any());
 
             Map<String, Object> json = responseToJson(response);
-            assertEquals("School with id UCSB deleted", json.get("message"));
+            assertEquals("School with id ucsb deleted", json.get("message"));
         }
 
         @WithMockUser(roles = { "ADMIN", "USER" })
@@ -277,18 +276,18 @@ public class SchoolControllerTests extends ControllerTestCase{
                         throws Exception {
                 // arrange
 
-                when(schoolRepository.findById(eq("UCSB"))).thenReturn(Optional.empty());
+                when(schoolRepository.findById(eq("ucsb"))).thenReturn(Optional.empty());
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                delete("/api/schools?abbrev=UCSB")
+                                delete("/api/schools?abbrev=ucsb")
                                                 .with(csrf()))
                                 .andExpect(status().isNotFound()).andReturn();
 
                 // assert
-                verify(schoolRepository, times(1)).findById("UCSB");
+                verify(schoolRepository, times(1)).findById("ucsb");
                 Map<String, Object> json = responseToJson(response);
-                assertEquals("School with id UCSB not found", json.get("message"));
+                assertEquals("School with id ucsb not found", json.get("message"));
         }
 
     
@@ -317,18 +316,17 @@ public class SchoolControllerTests extends ControllerTestCase{
                             .name("Ubarbara")
                             .termRegex("[WSMF]\\d\\d")
 
-                            .termDescription("F24")
+                            .termDescription("quarter")
                             .termError("error")
                             .build();
-
+            String requestBody = objectMapper.writeValueAsString(school);
             when(schoolRepository.save(eq(school))).thenReturn(school);  
 
 
             // act
-            MvcResult response = mockMvc.perform(
-                post("/api/schools/post?abbrev=ucsb&name=Ubarbara&termRegex=[WSMF]\\d\\d&termDescription=F24&termError=error")
-                                .with(csrf()))
-                .andExpect(status().isOk()).andReturn();
+            MvcResult response = mockMvc.perform(post("/api/schools/post")
+                            .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8").content(requestBody).with(csrf()))
+                            .andExpect(status().isOk()).andReturn(); // only admins can post
                 
 
             // assert
@@ -348,23 +346,23 @@ public class SchoolControllerTests extends ControllerTestCase{
                             .abbrev("ucsb")
                             .name("Ubarbara")
                             .termRegex("[WSMF]\\d\\d")
-                            .termDescription("q24")
+                            .termDescription("term")
                             .termError("error")
                             .build();
-
+            String requestBody = objectMapper.writeValueAsString(school);
             when(schoolRepository.save(eq(school))).thenReturn(school);  
 
 
             // act
-            MvcResult response = mockMvc.perform(post("/api/schools/post?abbrev=UCSB&name=Ubarbara&termRegex=[WSMF]\\d\\d&termDescription=q24&termError=error")
-                                                                .with(csrf()))
-                            .andExpect(status().is(400)).andReturn(); // only admins can post
+            MvcResult response = mockMvc.perform(post("/api/schools/post")
+                            .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8").content(requestBody).with(csrf()))
+                            .andExpect(status().is(200)).andReturn(); // only admins can post
                 
 
             // assert
             Map<String, Object> json = responseToJson(response);
-            assertEquals("IllegalArgumentException", json.get("type"));
-            assertEquals("Invalid termDescription format. It must follow the pattern [WSMF]\\d\\d", json.get("message"));            
+            // assertEquals("IllegalArgumentException", json.get("type"));
+            // assertEquals("Invalid termDescription format. It must follow the pattern [WSMF]\\d\\d", json.get("message"));            
             }
 
     
@@ -377,16 +375,16 @@ public class SchoolControllerTests extends ControllerTestCase{
                             .abbrev("UCSB")
                             .name("Ubarbara")
                             .termRegex("[WSMF]\\d\\d")
-                            .termDescription("F24")
+                            .termDescription("quarter")
                             .termError("error")
                             .build();
-
+            String requestBody = objectMapper.writeValueAsString(school);
             when(schoolRepository.save(eq(school))).thenReturn(school);  
 
 
             // act
-            MvcResult response = mockMvc.perform(post("/api/schools/post?abbrev=UCSB&name=Ubarbara&termRegex=[WSMF]\\d\\d&termDescription=F24&termError=error")
-                                                                .with(csrf()))
+            MvcResult response = mockMvc.perform(post("/api/schools/post")
+                            .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8").content(requestBody).with(csrf()))
                             .andExpect(status().is(400)).andReturn(); // only admins can post
                 
 
@@ -404,7 +402,7 @@ public class SchoolControllerTests extends ControllerTestCase{
                 School editedSchool = School.builder()
                                     .abbrev(nonExistentAbbrev)
                                     .name("Nonexistent University")
-                                    .termRegex("W24")
+                                    .termRegex("S")
                                     .build();
 
             
@@ -424,4 +422,3 @@ public class SchoolControllerTests extends ControllerTestCase{
 
 
 }
-

@@ -23,7 +23,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CoursesTable courses={coursesFixtures.threeCourses} currentUser={currentUser} />
+          <CoursesTable courses={coursesFixtures.threeCourses} currentUser={currentUser} showEnabled={true} deleteEnabled={true}/>
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -57,6 +57,9 @@ describe("UserTable tests", () => {
     const deleteButton = screen.queryByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).not.toBeInTheDocument();
 
+    const showButton = screen.queryByTestId(`${testId}-cell-row-0-col-Show-button`);
+    expect(showButton).not.toBeInTheDocument();
+
     const totalCoursesElement = screen.getByText("Total Courses: 3"); // Assuming there are 3 courses in the fixture
     expect(totalCoursesElement).toBeInTheDocument();
 
@@ -76,7 +79,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CoursesTable courses={[]} currentUser={currentUser} />
+          <CoursesTable courses={[]} currentUser={currentUser} showEnabled={true} deleteEnabled={true}/>
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -104,7 +107,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-            <CoursesTable courses={coursesFixtures.threeCourses} currentUser={currentUser} />
+            <CoursesTable courses={coursesFixtures.threeCourses} currentUser={currentUser} showEnabled={true} deleteEnabled={true}/>
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -134,6 +137,10 @@ describe("UserTable tests", () => {
     expect(editButton).toBeInTheDocument();
     expect(editButton).toHaveClass("btn-primary");
 
+    const showButton = screen.getByTestId(`${testId}-cell-row-0-col-Show-button`);
+    expect(showButton).toBeInTheDocument();
+    expect(showButton).toHaveClass("btn-primary");
+
     const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
@@ -149,7 +156,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-            <CoursesTable courses={coursesFixtures.threeCourses} currentUser={currentUser} />
+            <CoursesTable courses={coursesFixtures.threeCourses} currentUser={currentUser} showEnabled={true} deleteEnabled={true}/>
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -178,6 +185,10 @@ describe("UserTable tests", () => {
     const staffButton = screen.getByTestId(`${testId}-cell-row-0-col-Staff-button`);
     expect(staffButton).toBeInTheDocument();
     expect(staffButton).toHaveClass("btn-primary");
+
+    const showButton = screen.getByTestId(`${testId}-cell-row-0-col-Show-button`);
+    expect(showButton).toBeInTheDocument();
+    expect(showButton).toHaveClass("btn-primary");
 
     const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
@@ -277,7 +288,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-            <CoursesTable courses={coursesFixtures.threeCourses} currentUser={currentUser} />
+            <CoursesTable courses={coursesFixtures.threeCourses} currentUser={currentUser} deleteEnabled={true}/>
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -294,4 +305,43 @@ describe("UserTable tests", () => {
     expect(totalCoursesElement).toBeInTheDocument();
   });
 
+  test("Show button takes the callback", async () => {
+      const currentUser = currentUserFixtures.adminUser;
+
+      render(
+          <QueryClientProvider client={queryClient}>
+            <MemoryRouter>
+              <CoursesTable courses={coursesFixtures.threeCourses} currentUser={currentUser} showEnabled={true} />
+            </MemoryRouter>
+          </QueryClientProvider>
+      )
+
+    await screen.findByTestId(`CoursesTable-cell-row-0-col-Show-button`);
+
+    const showButton = screen.getByTestId(`CoursesTable-cell-row-0-col-Show-button`);
+    expect(showButton).toBeInTheDocument();
+
+    fireEvent.click(showButton);
+
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/courses/1'));
+
+  })
+
+
+  test("No show and delete button when disabled", async() => {
+    const currentUser = currentUserFixtures.adminUser;
+
+    render(
+        <QueryClientProvider client={queryClient}>
+          <MemoryRouter>
+            <CoursesTable courses={coursesFixtures.threeCourses} currentUser={currentUser} />
+          </MemoryRouter>
+        </QueryClientProvider>
+    )
+
+    const showButton = screen.queryByTestId(`CoursesTable-cell-row-0-col-Show-button`);
+    const deleteButton = screen.queryByTestId(`CoursesTable-cell-row-0-col-Delete-button`);
+    expect(showButton).not.toBeInTheDocument();
+    expect(deleteButton).not.toBeInTheDocument();
+  })
 });

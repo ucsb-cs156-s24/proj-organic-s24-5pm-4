@@ -5,7 +5,7 @@ import React from "react";
  import { useNavigate } from "react-router-dom";
  import { hasRole } from "main/utils/currentUser";
 
- export default function CoursesTable({ courses, currentUser }) {
+ export default function CoursesTable({ courses, currentUser, showEnabled = false, deleteEnabled = false }) {
 
      const navigate = useNavigate();
 
@@ -20,6 +20,10 @@ import React from "react";
      const editCallback = (cell) => {
          navigate(`/courses/edit/${cell.row.values.id}`);
      };
+
+     const showCallback = (cell) => {
+         navigate(`/courses/${cell.row.values.id}`)
+     }
 
      // Stryker disable all : hard to test for query caching
 
@@ -67,9 +71,15 @@ import React from "react";
      ];
 
      if (hasRole(currentUser, "ROLE_ADMIN") || hasRole(currentUser, "ROLE_INSTRUCTOR")) {
+         if(showEnabled){
+             //No infinite linking loops --shouldn't be able to click the show button on the show page
+             columns.push(ButtonColumn("Show", "primary", showCallback, "CoursesTable"));
+         }
          columns.push(ButtonColumn("Staff", "primary", staffCallback, "CoursesTable"));
          columns.push(ButtonColumn("Edit", "primary", editCallback, "CoursesTable"));
-         columns.push(ButtonColumn("Delete", "danger", deleteCallback, "CoursesTable"));
+         if(deleteEnabled) {
+             columns.push(ButtonColumn("Delete", "danger", deleteCallback, "CoursesTable"));
+         }
      }
      
      columns.push(ButtonColumn("Join", "primary", joinCallback, "CoursesTable"));
