@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>15/15</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -327,7 +327,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Button, Form, Row, Col } from 'react-bootstrap';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Button, Form, Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 &nbsp;
@@ -355,6 +355,11 @@ function SchoolForm({ initialContents, submitAction, buttonLabel = "Create" }) {
             &lt;Col&gt;
                     &lt;Form.Group className="mb-3" &gt;
                         &lt;Form.Label htmlFor="abbrev"&gt;Abbreviation&lt;/Form.Label&gt;
+                        &lt;OverlayTrigger
+                            placement="top"
+                            overlay={&lt;Tooltip&gt;'abbrev' field should be all lowercase&lt;/Tooltip&gt;}
+                            delay='5'
+                        &gt;
                         &lt;Form.Control
                         data-testid="SchoolForm-abbrev"
                         id="abbrev"
@@ -363,6 +368,7 @@ function SchoolForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         {...register("abbrev", {required: true, pattern: abbrev_regex})}
                         disabled={Boolean(initialContents)}
                         /&gt;
+                        &lt;/OverlayTrigger&gt;
                         &lt;Form.Control.Feedback type="invalid"&gt;
                             {errors.abbrev?.type === 'required' &amp;&amp; 'Abbreviation is required. '}
                             {errors.abbrev?.type === 'pattern' &amp;&amp; 'Abbreviation must be lowercase letters (_ and . allowed), e.g. ucsb'}
@@ -387,6 +393,11 @@ function SchoolForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                 &lt;Col&gt;
                     &lt;Form.Group className="mb-3" &gt;
                         &lt;Form.Label htmlFor="termRegex"&gt;Term Regex&lt;/Form.Label&gt;
+                        &lt;OverlayTrigger
+                            placement="top"
+                            overlay={&lt;Tooltip&gt;regular expression for the format of terms (e.g. '[WSMF]\d\d' for quarters of the form F24, W25, S25, M25)&lt;/Tooltip&gt;}
+                            delay='5'
+                        &gt;
                         &lt;Form.Control
                             data-testid="SchoolForm-termRegex"
                             id="termRegex"
@@ -394,6 +405,7 @@ function SchoolForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                             isInvalid={Boolean(errors.termRegex)}
                             {...register("termRegex", { required: true })}
                         /&gt;
+                        &lt;/OverlayTrigger&gt;
                         &lt;Form.Control.Feedback type="invalid"&gt;
                             {errors.termRegex &amp;&amp; 'Term Regex is required. '}
                         &lt;/Form.Control.Feedback&gt;
@@ -405,6 +417,11 @@ function SchoolForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                 &lt;Col&gt;
                     &lt;Form.Group className="mb-3" &gt;
                         &lt;Form.Label htmlFor="termDescription"&gt;Term Description&lt;/Form.Label&gt;
+                        &lt;OverlayTrigger
+                            placement="top"
+                            overlay={&lt;Tooltip&gt;E.g. Quarter, Semester or Session&lt;/Tooltip&gt;}
+                            delay='5'
+                        &gt;
                         &lt;Form.Control
                             data-testid="SchoolForm-termDescription"
                             id="termDescription"
@@ -412,26 +429,9 @@ function SchoolForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                             isInvalid={Boolean(errors.termDescription)}
                             {...register("termDescription", { required: true})}
                         /&gt;
+                        &lt;/OverlayTrigger&gt;
                         &lt;Form.Control.Feedback type="invalid"&gt;
                             {errors.termDescription &amp;&amp; 'Term Description is required.'}
-                        &lt;/Form.Control.Feedback&gt;
-                    &lt;/Form.Group&gt;
-                &lt;/Col&gt;
-            &lt;/Row&gt;
-&nbsp;
-            &lt;Row&gt;
-                &lt;Col&gt;
-                    &lt;Form.Group className="mb-3" &gt;
-                        &lt;Form.Label htmlFor="termError"&gt;Term Error&lt;/Form.Label&gt;
-                        &lt;Form.Control
-                            data-testid="SchoolForm-termError"
-                            id="termError"
-                            type="text"
-                            isInvalid={Boolean(errors.termError)}
-                            {...register("termError", { required: true})}
-                        /&gt;
-                        &lt;Form.Control.Feedback type="invalid"&gt;
-                            {errors.termError &amp;&amp; 'Term Error is required.'}
                         &lt;/Form.Control.Feedback&gt;
                     &lt;/Form.Group&gt;
                 &lt;/Col&gt;
@@ -466,7 +466,7 @@ export default SchoolForm;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Jun 05 2024 17:22:59 GMT-0700 (Pacific Daylight Time)
+                at Thu Jun 06 2024 09:07:33 GMT-0700 (Pacific Daylight Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
