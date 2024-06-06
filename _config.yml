@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s24/proj-organic-s24-5pm-4
 owner: ucsb-cs156-s24
 repo_name: proj-organic-s24-5pm-4
-pull_requests: [{"author":{"id":"MDQ6VXNlcjUxNTIwMzU4","is_bot":false,"login":"SR33G33","name":"Sreeganesh Siva"},"headRefName":"Sreeganesh-SchoolsCRUD-UIImprovements","number":46,"title":"School Page UI Improvements","url":"https://github.com/ucsb-cs156-s24/proj-organic-s24-5pm-4/pull/46"},{"author":{"id":"MDQ6VXNlcjUxNTIwMzU4","is_bot":false,"login":"SR33G33","name":"Sreeganesh Siva"},"headRefName":"Sreeganesh-SchoolsCRUD-BackendBugs","number":45,"title":"School Edit Page now prevents user from editing the Abbrev param","url":"https://github.com/ucsb-cs156-s24/proj-organic-s24-5pm-4/pull/45"}]
+pull_requests: [{"author":{"id":"MDQ6VXNlcjUxNTIwMzU4","is_bot":false,"login":"SR33G33","name":"Sreeganesh Siva"},"headRefName":"Sreeganesh-SchoolsCRUD-UIImprovements","number":46,"title":"School Page UI Improvements","url":"https://github.com/ucsb-cs156-s24/proj-organic-s24-5pm-4/pull/46"}]
