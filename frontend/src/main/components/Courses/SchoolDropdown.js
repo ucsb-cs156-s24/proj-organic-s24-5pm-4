@@ -5,7 +5,8 @@ import {useFormContext} from "react-hook-form";
 const SchoolDropdown = ({schools = [], testId}) => {
     const {
         register,
-        formState: {errors}
+        formState: {errors},
+        formState
     } = useFormContext();
 
     return (<Form.Group>
@@ -13,6 +14,7 @@ const SchoolDropdown = ({schools = [], testId}) => {
         <Form.Control data-testid={`${testId}-school`} id="school"  as="select"
           isInvalid={Boolean(errors.school)}
           {...register("schoolAbbrev", {required: true, minLength: 2})}
+            value={formState.defaultValues.schoolAbbrev}
         >
             <option value=""></option>
             {schools.map(function (object, i) {
